@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  periodicalliterature.dal:
+    image: periodicalliterature.dal
+    build:
+      context: .\PeriodicalLiterature.DAL
+      dockerfile: Dockerfile

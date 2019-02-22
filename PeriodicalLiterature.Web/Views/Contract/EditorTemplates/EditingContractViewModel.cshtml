@@ -1,0 +1,88 @@
+﻿@model PeriodicalLiterature.Web.Models.ViewModels.ContractViewModel
+
+@{
+    Layout = null;
+}
+
+
+<div class="form-group">
+    @Html.LabelFor(model => model.EditionTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.EditionTitle, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.EditionTitle, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.DropDownListFor(model => model.Category,
+            Model.CategorySelectList,
+            new {@class = "chosen-select form-control" })
+        @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Language, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.DropDownListFor(model => model.Language,
+            Model.LanguageSelectList,
+            new {@class = "chosen-select form-control" })
+        @Html.ValidationMessageFor(model => model.Language, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Genres, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.ListBoxFor(model => model.Genres,
+            Model.GenreMultiSelectList,
+            new {@class = "chosen-select form-control" })
+        @Html.ValidationMessageFor(model => model.Genres, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Periodicity, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.DropDownListFor(model => model.Periodicity,
+            Model.PeriodicitySelectList,
+            new {@class = "chosen-select form-control" })
+        @Html.ValidationMessageFor(model => model.Periodicity, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.ReleasePrice, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.ReleasePrice, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.ReleasePrice, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.DescriptionEdition, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.DescriptionEdition, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.DescriptionEdition, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Periodicity, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.DropDownListFor(model => model.Periodicity,
+            Model.PeriodicitySelectList,
+            new {@class = "chosen-select form-control" })
+        @Html.ValidationMessageFor(model => model.Periodicity, "", new { @class = "text-danger" })
+    </div>
+</div>

@@ -1,0 +1,43 @@
+﻿@model PeriodicalLiterature.Models.Entity.Role.Publisher
+
+@{
+    ViewBag.Title = "MyAccount";
+    Layout = "~/Views/Shared/_LayoutPublisher.cshtml";
+}
+
+<h2>MyAccount</h2>
+
+<div>
+    <h4>Publisher</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PublisherName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PublisherName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Account)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Account)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlannedAccount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlannedAccount)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id}) 
+   
+</p>
