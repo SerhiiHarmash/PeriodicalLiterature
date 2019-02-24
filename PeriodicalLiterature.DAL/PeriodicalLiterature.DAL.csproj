@@ -90,6 +90,10 @@
     <Compile Include="Migrations\201902171801242_AddGenreTable.Designer.cs">
       <DependentUpon>201902171801242_AddGenreTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902231657085_ChangedTableContract.cs" />
+    <Compile Include="Migrations\201902231657085_ChangedTableContract.Designer.cs">
+      <DependentUpon>201902231657085_ChangedTableContract.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PeriodicalLiteratureContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -116,6 +120,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902171801242_AddGenreTable.resx">
       <DependentUpon>201902171801242_AddGenreTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902231657085_ChangedTableContract.resx">
+      <DependentUpon>201902231657085_ChangedTableContract.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

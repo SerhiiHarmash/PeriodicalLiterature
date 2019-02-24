@@ -198,14 +198,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\BossController.cs" />
     <Compile Include="Controllers\ContractController.cs" />
     <Compile Include="Controllers\StartPageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Mapper\MapperProfile.cs" />
-    <Compile Include="Models\ViewModels\ContractViewModel.cs" />
+    <Compile Include="Models\ViewModels\Contract\ContractViewModel.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
     <Compile Include="Models\ViewModels\RegisterViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -213,6 +212,8 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Chousen\chosen-sprite.png" />
+    <Content Include="Content\Chousen\chosen.min.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -222,6 +223,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\chosen.jquery.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -240,32 +242,25 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\StartPage\Index.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Shared\_LayoutPublisher.cshtml" />
-    <Content Include="Views\Publisher\ComposeContract.cshtml" />
-    <Content Include="Views\Publisher\MyAccount.cshtml" />
-    <Content Include="Views\Publisher\Announcement.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Publisher\Index.cshtml" />
     <Content Include="Views\StartPage\AdminHomePage.cshtml" />
     <Content Include="Views\StartPage\PublisherHomePage.cshtml" />
     <Content Include="Views\Shared\_LayoutSubscriber.cshtml" />
     <Content Include="Views\StartPage\SubscriberHomePage.cshtml" />
     <Content Include="Views\Contract\CreateContract.cshtml" />
     <Content Include="Views\Contract\EditorTemplates\EditingContractViewModel.cshtml" />
+    <Content Include="Views\StartPage\DefaultHomePage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Storage\" />
     <Folder Include="Uploads\" />
-    <Folder Include="Views\Role\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

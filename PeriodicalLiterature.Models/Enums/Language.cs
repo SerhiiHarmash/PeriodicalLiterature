@@ -2,7 +2,7 @@
 {
     public enum Language
     {
-        Engliash,
+        English,
         Italian,
         Russian,
         Spanish,

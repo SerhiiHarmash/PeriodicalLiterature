@@ -12,7 +12,7 @@ namespace PeriodicalLiterature.Web.Controllers
                 return View("PublisherHomePage");
             if (User.IsInRole("Subscriber"))
                 return View("SubscriberHomePage");
-            return View();
+            return View("DefaultHomePage");
         }
     }
 }

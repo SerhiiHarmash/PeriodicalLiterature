@@ -10,13 +10,22 @@
                 "Index", "User", routeValues: null, htmlAttributes: new { @class = "dsfdsfcsdc" })
         </li>
 
-        <li> @Html.ActionLink("log out", "Logout", "Account", routeValues: null, htmlAttributes: new { @class = "dsfdsfcsdc" })</li>
+        <li>
+            @Html.ActionLink("log out", "Logout", "Account",
+                routeValues: null, htmlAttributes: new {@class = "dsfdsfcsdc"})
+        </li>
     </ul>
 }
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("check in", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>
+            @Html.ActionLink("check in", "Register", "Account",
+            routeValues: null, htmlAttributes: new { id = "registerLink" })
+        </li>
+        <li>
+            @Html.ActionLink("log in", "Login", "Account",
+            routeValues: null, htmlAttributes: new { id = "loginLink" })
+        </li>
     </ul>
 }

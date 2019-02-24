@@ -8,7 +8,7 @@ namespace PeriodicalLiterature.Models.Entities
     {
         public string EditionTitle { get; set; }
 
-        public Guid CoverId { get; set; }
+        public string CoverName { get; set; }
 
         public Category Category { get; set; }
 
@@ -22,7 +22,7 @@ namespace PeriodicalLiterature.Models.Entities
 
         public decimal ReleasePrice { get; set; }
 
-        public Guid FileId { get; set; }
+        public string FileName { get; set; }
 
         public ICollection<Edition> Editions { get; set; }
 

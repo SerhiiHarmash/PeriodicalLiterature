@@ -7,6 +7,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/Chousen/chosen.min.css" rel="stylesheet" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -21,15 +22,15 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Сatalog", "Index", "Home")</li>                                          
+                    <li>@Html.ActionLink("Сatalog", "Index", "Home")</li>
                 </ul>
                 @if (User.IsInRole("User"))
                 {
-                @Html.Partial("_LoginPartial","User")
-                }               
+                    @Html.Partial("_LoginPartial", "User")
+                }
                 @if (!Request.IsAuthenticated)
                 {
-                     @Html.Partial("_LoginPartial", "")
+                    @Html.Partial("_LoginPartial", "")
                 }
 
             </div>
@@ -45,6 +46,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/chosen.jquery.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

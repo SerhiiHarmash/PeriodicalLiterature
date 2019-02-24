@@ -18,22 +18,16 @@ namespace PeriodicalLiterature.CR
             Bind<IRepositoryFactory>().ToFactory();
             Bind<PeriodicalLiteratureContext>().ToSelf().InRequestScope();
 
-       
+
             Bind<IAdminService>().To<AdminService>();
             Bind<IPublisherService>().To<PublisherService>();
             Bind<ISubscriberService>().To<SubscriberService>();
 
             Bind<IContractService>().To<ContractService>();
             Bind<IContractResultService>().To<ContractResultService>();
-            Bind<ICommentService>().To<CommentService>();
-            Bind<IContractResultService>().To<ContractResultService>();
-            Bind<IContractResultService>().To<ContractResultService>();
-            Bind<IContractResultService>().To<ContractResultService>();
-            Bind<IContractResultService>().To<ContractResultService>();
-            Bind<IContractResultService>().To<ContractResultService>();
-
-
-
+            Bind<IEditionService>().To<EditionService>();
+            Bind<IEditionResultService>().To<EditionResultService>();
+            Bind<IGenreService>().To<GenreService>();
         }
     }
 }

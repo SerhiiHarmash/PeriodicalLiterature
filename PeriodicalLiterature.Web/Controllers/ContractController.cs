@@ -1,9 +1,14 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using PeriodicalLiterature.Contracts.Interfaces.Services;
 using System.Web.Mvc;
+using AutoMapper;
+using Microsoft.AspNet.Identity;
+using PeriodicalLiterature.Models.Entities;
 using PeriodicalLiterature.Models.Enums;
-using PeriodicalLiterature.Web.Models.ViewModels;
+using PeriodicalLiterature.Models.Filters;
+using PeriodicalLiterature.Web.Models.ViewModels.Contract;
 
 namespace PeriodicalLiterature.Web.Controllers
 {
@@ -20,24 +25,86 @@ namespace PeriodicalLiterature.Web.Controllers
             _contractService = contractService;
         }
 
-        public ActionResult CreateContract()
+        [Authorize(Roles = "Admin")]
+        public ActionResult GetAllContracts()
         {
-            var model = new ContractViewModel();
-
-            var genres = _genreService.GetAllGenres().Select(genre => genre.Name);
-
-            model.GenreMultiSelectList = new MultiSelectList(genres);
-            model.CategorySelectList = EnumToSelectList<Category>();
-            model.LanguageSelectList = EnumToSelectList<Language>();
-            
+            var contracts = _contractService.GetAllContracts();
 
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
+        public ActionResult GetAllContracts(ContractFilterCriteria filterCriteria)
+        {
+            var contracts = _contractService.GetAllContracts(filterCriteria);
+            return View();
+        }
+
+        [Authorize(Roles = "Publisher")]
         public ActionResult CreateContract()
         {
-            return View();
+            var model = new ContractViewModel();
+            ConfigurateBaseDateForContractViewModel(model);
+
+            return View(model);
+        }  
+
+        [HttpPost]
+        [Authorize(Roles = "Publisher")]
+        public ActionResult CreateContract(ContractViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                ConfigurateBaseDateForContractViewModel(model);
+
+                return View(model);
+            }
+
+            var extensionCover = Path.GetExtension(model.Cover.FileName);
+
+            if (!(extensionCover == ".png" || extensionCover == ".jpg"))
+            {
+                ConfigurateBaseDateForContractViewModel(model);
+                ModelState.AddModelError("", @"Extension for cover should be '.png' or '.jpg'");
+
+                return View(model);
+            }
+
+            var extensionFile = Path.GetExtension(model.File.FileName);
+
+            if (extensionFile != ".pdf")
+            {
+                ConfigurateBaseDateForContractViewModel(model);
+                ModelState.AddModelError("", @"Extension for file should be '.pdf'");
+
+                return View(model);
+            }
+
+            model.PublisherId = new Guid(User.Identity.GetUserId());
+            model.FileName = Guid.NewGuid() + extensionFile;
+            model.CoverName = Guid.NewGuid() + extensionCover;
+
+            model.File.SaveAs(Server.MapPath("../Storage/" + model.FileName));
+            model.Cover.SaveAs(Server.MapPath("../Storage/" + model.CoverName));
+
+            var contract = new Contract();
+            Mapper.Map(model, contract);
+
+            _contractService.AddContract(contract, model.Genres);
+
+            var messageResult = Json("The contract was took to handling", JsonRequestBehavior.AllowGet);
+
+            return messageResult;
+        }
+
+        private void ConfigurateBaseDateForContractViewModel(ContractViewModel model)
+        {
+            var genres = _genreService.GetAllGenres().Select(genre => genre.Name);
+            model.GenreMultiSelectList = new MultiSelectList(genres);
+            model.CategorySelectList = EnumToSelectList<Category>();
+            model.LanguageSelectList = EnumToSelectList<Language>();
+            model.PeriodicitySelectList = EnumToSelectList<Periodicity>();
         }
 
         private SelectList EnumToSelectList<T>() where T : struct

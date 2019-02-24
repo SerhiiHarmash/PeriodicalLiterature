@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Web;
 using System.Web.Mvc;
 
-namespace PeriodicalLiterature.Web.Models.ViewModels
+namespace PeriodicalLiterature.Web.Models.ViewModels.Contract
 {
     public class ContractViewModel
     {
@@ -51,16 +51,14 @@ namespace PeriodicalLiterature.Web.Models.ViewModels
         [DataType(DataType.Currency)]
         public decimal ReleasePrice { get; set; }
 
-        [Required(ErrorMessage = "cover is required")]
-        [Display(Name = "attach cover")]
+        [Required(ErrorMessage = "Cover is required")]
         public HttpPostedFileBase Cover { get; set; }
 
-        public Guid CoverId { get; set; }
+        public string CoverName { get; set; }
 
-        [Required(ErrorMessage = "file is required")]
-        [Display(Name = "attach edition")]
+        [Required(ErrorMessage = "File is required")]
         public HttpPostedFileBase File { get; set; }
 
-        public Guid FileId { get; set; }
+        public string FileName { get; set; }
     }
 }

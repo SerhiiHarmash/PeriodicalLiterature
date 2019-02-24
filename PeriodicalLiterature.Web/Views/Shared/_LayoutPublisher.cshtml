@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/Chousen/chosen.min.css" rel="stylesheet" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -22,7 +23,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Мой кабинет", "MyAccount", "Publisher")</li>
                     <li>@Html.ActionLink("Изданные", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Оформить контрак", "ComposeContract", "Publisher")</li>
+                    <li>@Html.ActionLink("Sign Contract", "CreateContract", "Contract")</li>
                     <li>@Html.ActionLink("Добавить номер", "Index", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial", "Publisher")
@@ -39,6 +40,8 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/chosen.jquery.min.js"></script>
     @RenderSection("scripts", required: false)
+
 </body>
 </html>
