@@ -8,13 +8,15 @@ namespace PeriodicalLiterature.Models.Entities
     {
         public string EditionTitle { get; set; }
 
+        public DateTime Date { get; set; }
+
         public string CoverName { get; set; }
 
         public Category Category { get; set; }
 
         public Language Language { get; set; }
 
-        public ICollection<Genre> Genre { get; set; }
+        public ICollection<Genre> Genres { get; set; }
 
         public Periodicity Periodicity { get; set; }
 

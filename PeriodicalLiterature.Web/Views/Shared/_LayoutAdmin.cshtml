@@ -22,7 +22,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Мой кабинет", "Index", "Home")</li>
                     <li>@Html.ActionLink("Каталог журналов", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Контракты на проверку", "Contract", "Admin")</li>
+                    <li>@Html.ActionLink("Contracts", "GetAllContracts", "Contract")</li>
                     <li>@Html.ActionLink("Издания на проверку", "Index", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial", "Admin")

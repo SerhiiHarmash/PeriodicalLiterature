@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using PeriodicalLiterature.Contracts.Interfaces.Services;
@@ -16,13 +17,51 @@ namespace PeriodicalLiterature.Web.Controllers
     {
         private readonly IGenreService _genreService;
         private readonly IContractService _contractService;
+        private readonly IContractResultService _contractResultService;
+
 
         public ContractController(
             IGenreService genreService,
-            IContractService contractService)
+            IContractService contractService,
+            IContractResultService contractResultService)
         {
             _genreService = genreService;
             _contractService = contractService;
+            _contractResultService = contractResultService;
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult GetContractForApprove(Guid contractId)
+        {
+            var contract = _contractService.GetContractById(contractId);
+
+            var contractView = new ContractViewModel();
+
+            Mapper.Map(contract, contractView);
+
+            var model = new ContractForConfirmationViewModel
+            {
+                Contract = contractView
+            };
+
+            return View("ContractDetails", model);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public ActionResult GetContractForApprove(ContractForConfirmationViewModel model)
+        {
+            model.AdminId = new Guid(User.Identity.GetUserId());
+
+            var contractResult = new ContractResult();
+
+            Mapper.Map(model, contractResult);
+
+            _contractService.ChangeStatus(contractResult.ContractId, contractResult.Status);
+
+            _contractResultService.AddContractResult(contractResult);
+
+            return RedirectToAction("GetAllContracts");
         }
 
         [Authorize(Roles = "Admin")]
@@ -30,7 +69,11 @@ namespace PeriodicalLiterature.Web.Controllers
         {
             var contracts = _contractService.GetAllContracts();
 
-            return View();
+            var model = new List<ContractShortDetailsViewModel>();
+
+            Mapper.Map(contracts, model);
+            
+            return View("Contracts", model);
         }
 
         [Authorize(Roles = "Admin")]

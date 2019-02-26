@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.Mvc;
+using PeriodicalLiterature.Models.Entities;
 
 namespace PeriodicalLiterature.Web.Models.ViewModels.Contract
 {
@@ -12,6 +14,8 @@ namespace PeriodicalLiterature.Web.Models.ViewModels.Contract
         public Guid Id { get; set; }
 
         public Guid PublisherId { get; set; }
+
+        public Publisher Publisher { get; set; }
 
         [Required(ErrorMessage = "Edition title is required")]
         [Display(Name = "Edition title")]
@@ -27,6 +31,8 @@ namespace PeriodicalLiterature.Web.Models.ViewModels.Contract
         public Language Language { get; set; }
 
         public SelectList LanguageSelectList { get; set; }
+
+        public Status Status { get; set; }
 
         [Required(ErrorMessage = "Select one or more genres")]
         [Display(Name = "Genres")]

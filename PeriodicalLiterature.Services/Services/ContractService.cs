@@ -5,6 +5,7 @@ using PeriodicalLiterature.Models.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using PeriodicalLiterature.Models.Enums;
 
 namespace PeriodicalLiterature.Services.Services
 {
@@ -20,8 +21,9 @@ namespace PeriodicalLiterature.Services.Services
         public void AddContract(Contract contract, ICollection<string> genres)
         {
             contract.Id = Guid.NewGuid();
+            contract.Date = DateTime.UtcNow;
 
-            contract.Genre = _unitOfWork.GetRepository<Genre>()
+            contract.Genres = _unitOfWork.GetRepository<Genre>()
                 .GetMany(genre => genres.Contains(genre.Name)).ToList();
 
             _unitOfWork.GetRepository<Contract>().Add(contract);
@@ -41,9 +43,29 @@ namespace PeriodicalLiterature.Services.Services
             return null;
         }
 
+        public Contract GetContractById(Guid id)
+        {
+            var contract =_unitOfWork.GetRepository<Contract>()
+                .GetSingle(x => x.Id == id, x=>x.Genres  );
+
+            return contract;
+        }
+
+        public void ChangeStatus(Guid contractId, Status newStatus)
+        {
+            var contract = _unitOfWork.GetRepository<Contract>().GetSingle(x => x.Id == contractId);
+
+            if (contract != null)
+            {
+                contract.Status = newStatus;
+            }
+
+            _unitOfWork.Save();
+        }
+
         public void EditContract(Contract contract, ICollection<string> genres)
         {
-            contract.Genre = _unitOfWork.GetRepository<Genre>()
+            contract.Genres = _unitOfWork.GetRepository<Genre>()
                 .GetMany(genre => genres.Contains(genre.Name)).ToList();
 
             _unitOfWork.GetRepository<Contract>().Add(contract);
