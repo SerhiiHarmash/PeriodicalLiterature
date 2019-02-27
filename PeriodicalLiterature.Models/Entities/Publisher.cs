@@ -16,6 +16,6 @@ namespace PeriodicalLiterature.Models.Entities
 
         public decimal PlannedAccount { get; set; }
 
-        public virtual ICollection<Contract> Contracts { get; set; }
+        public  ICollection<Contract> Contracts { get; set; }
     }
 }

@@ -6,7 +6,9 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Contract details</h2>
+<h2 style="display: inline-block">Contract details</h2>
+   
+<p> <b>Status:</b> @Model.Contract.Status</p>
 
 <div>
     <hr />
@@ -25,8 +27,33 @@
 
         <dd>
             @Html.DisplayFor(model => model.Contract.PublisherId)
-            @*@Html.ActionLink("", "", "");*@
         </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Contract.Language)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contract.Language)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Contract.Periodicity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contract.Periodicity)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Contract.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contract.Date)
+        </dd>
+
+     
 
         <dt>
             @Html.DisplayNameFor(model => model.Contract.Genres)

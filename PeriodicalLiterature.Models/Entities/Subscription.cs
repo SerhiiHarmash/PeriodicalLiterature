@@ -20,11 +20,11 @@ namespace PeriodicalLiterature.Models.Entities
 
         public Guid UserId { get; set; }
 
-        public virtual Subscriber User { get; set; }
+        public  Subscriber User { get; set; }
 
         public Guid ContractId { get; set; }
 
-        public virtual Contract Contract { get; set; }
+        public  Contract Contract { get; set; }
 
         [NotMapped]
         public ICollection<Edition> Editions => Contract.Editions

@@ -12,17 +12,17 @@ namespace PeriodicalLiterature.Models.Entities
 
         public Guid UserId { get; set; }
 
-        public virtual User User { get; set; }
+        public  User User { get; set; }
 
         public Guid? ParentCommentId { get; set; }
 
-        public virtual Comment ParentComment { get; set; }
+        public  Comment ParentComment { get; set; }
 
         public bool IsDeleted { get; set; }
 
         public Guid EditionId { get; set; }
 
-        public virtual Edition Edition { get; set; }
+        public  Edition Edition { get; set; }
 
         public bool IsQuote { get; set; }
     }

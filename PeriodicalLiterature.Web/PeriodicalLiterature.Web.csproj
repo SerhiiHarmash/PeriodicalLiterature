@@ -198,12 +198,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ContractController.cs" />
     <Compile Include="Controllers\StartPageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\Mapper\MapperProfile.cs" />
+    <Compile Include="Infrastructure\Mapper\WebMapperProfile.cs" />
+    <Compile Include="Models\Admin\AdminViewModel.cs" />
     <Compile Include="Models\ViewModels\Contract\ContractForConfirmationViewModel.cs" />
     <Compile Include="Models\ViewModels\Contract\ContractShortDetailsViewModel.cs" />
     <Compile Include="Models\ViewModels\Contract\ContractViewModel.cs" />
@@ -260,6 +262,8 @@
     <Content Include="Views\StartPage\DefaultHomePage.cshtml" />
     <Content Include="Views\Contract\Contracts.cshtml" />
     <Content Include="Views\Contract\ContractDetails.cshtml" />
+    <Content Include="Views\Admin\AdminProfile.cshtml" />
+    <Content Include="Views\Admin\EditAdminProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -295,6 +299,10 @@
     <ProjectReference Include="..\PeriodicalLiterature.Models\PeriodicalLiterature.Models.csproj">
       <Project>{0098d5fb-3e42-4a8e-8e9a-679b06c90358}</Project>
       <Name>PeriodicalLiterature.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PeriodicalLiterature.Services\PeriodicalLiterature.Services.csproj">
+      <Project>{29c88abd-00ef-4b68-947e-4c49a87e8961}</Project>
+      <Name>PeriodicalLiterature.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

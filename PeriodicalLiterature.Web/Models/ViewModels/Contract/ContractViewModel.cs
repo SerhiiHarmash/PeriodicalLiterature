@@ -35,13 +35,13 @@ namespace PeriodicalLiterature.Web.Models.ViewModels.Contract
         public Status Status { get; set; }
 
         [Required(ErrorMessage = "Select one or more genres")]
-        [Display(Name = "Genres")]
         public ICollection<string> Genres { get; set; }
+
+        public DateTime Date { get; set; }
 
         public MultiSelectList GenreMultiSelectList { get; set; }
 
         [Required(ErrorMessage = "Periodicity is required")]
-        [Display(Name = "Periodicity")]
         public Periodicity Periodicity { get; set; }
 
         public SelectList PeriodicitySelectList { get; set; }

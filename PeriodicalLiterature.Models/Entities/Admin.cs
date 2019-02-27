@@ -9,8 +9,8 @@ namespace PeriodicalLiterature.Models.Entities
     {
         public string SecondName { get; set; }
 
-        public virtual ICollection<ContractResult> ContractResults { get; set; }
+        public  ICollection<ContractResult> ContractResults { get; set; }
 
-        public virtual ICollection<EditionResult> EditionResults { get; set; }
+        public  ICollection<EditionResult> EditionResults { get; set; }
     }
 }

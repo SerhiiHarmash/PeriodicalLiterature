@@ -46,7 +46,7 @@ namespace PeriodicalLiterature.Services.Services
         public Contract GetContractById(Guid id)
         {
             var contract =_unitOfWork.GetRepository<Contract>()
-                .GetSingle(x => x.Id == id, x=>x.Genres  );
+                .GetSingle(x => x.Id == id, x=>x.Genres, i=>i.Publisher);
 
             return contract;
         }
@@ -65,12 +65,12 @@ namespace PeriodicalLiterature.Services.Services
 
         public void EditContract(Contract contract, ICollection<string> genres)
         {
-            contract.Genres = _unitOfWork.GetRepository<Genre>()
-                .GetMany(genre => genres.Contains(genre.Name)).ToList();
+            //contract.Genres = _unitOfWork.GetRepository<Genre>()
+            //    .GetMany(genre => genres.Contains(genre.Name)).ToList();
 
-            _unitOfWork.GetRepository<Contract>().Add(contract);
+            //_unitOfWork.GetRepository<Contract>().Add(contract);
 
-            _unitOfWork.Save();
+            //_unitOfWork.Save();
         }
     }
 }

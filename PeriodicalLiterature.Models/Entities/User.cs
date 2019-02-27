@@ -11,7 +11,7 @@ namespace PeriodicalLiterature.Models.Entities
     {
         public string Name { get; set; }
 
-        public virtual ICollection<Comment> Comments { get; set; }
+        public  ICollection<Comment> Comments { get; set; }
 
     }
 }

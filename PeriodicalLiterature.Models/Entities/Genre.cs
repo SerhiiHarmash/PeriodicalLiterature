@@ -10,6 +10,6 @@ namespace PeriodicalLiterature.Models.Entities
         [StringLength(100, MinimumLength = 2)]
         public string Name { get; set; }
 
-        public virtual ICollection<Contract> Contracts { get; set; }
+        public  ICollection<Contract> Contracts { get; set; }
     }
 }

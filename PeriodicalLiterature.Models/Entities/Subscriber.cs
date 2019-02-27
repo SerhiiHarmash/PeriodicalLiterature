@@ -10,6 +10,6 @@ namespace PeriodicalLiterature.Models.Entities
 
         public decimal Account { get; set; }
         
-        public virtual ICollection<Subscription> Subscriptions { get; set; }
+        public  ICollection<Subscription> Subscriptions { get; set; }
     }
 }

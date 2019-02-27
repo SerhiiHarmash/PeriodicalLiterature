@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using PeriodicalLiterature.Services.MapperConfig;
 
 namespace PeriodicalLiterature.Web.App_Start
 {
@@ -13,7 +14,8 @@ namespace PeriodicalLiterature.Web.App_Start
         {
             Mapper.Initialize(cfg =>
             {
-                cfg.AddProfile<MapperProfile>();              
+                cfg.AddProfile<WebMapperProfile>();   
+                cfg.AddProfile<BLLMapperProfile>();
             });
         }
     }

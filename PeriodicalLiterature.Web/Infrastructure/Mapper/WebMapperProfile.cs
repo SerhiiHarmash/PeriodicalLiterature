@@ -2,13 +2,14 @@
 using AutoMapper;
 using PeriodicalLiterature.Models.Entities;
 using PeriodicalLiterature.Models.Enums;
+using PeriodicalLiterature.Web.Models.Admin;
 using PeriodicalLiterature.Web.Models.ViewModels.Contract;
 
 namespace PeriodicalLiterature.Web.Infrastructure.Mapper
 {
-    public class MapperProfile : Profile
+    public class WebMapperProfile : Profile
     {
-        public MapperProfile()
+        public WebMapperProfile()
         {
             CreateMap<ContractViewModel, Contract>();
 
@@ -26,6 +27,8 @@ namespace PeriodicalLiterature.Web.Infrastructure.Mapper
                     model => model.Status,
                     opt => opt
                         .MapFrom(contract => contract.ConfirmationResult ? Status.Approved : Status.Canceled));
+
+            CreateMap<Admin, AdminViewModel>().ReverseMap();
         }
     }
 }
