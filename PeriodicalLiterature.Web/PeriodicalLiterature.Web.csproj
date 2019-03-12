@@ -200,16 +200,27 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ContractController.cs" />
+    <Compile Include="Controllers\EditionController.cs" />
+    <Compile Include="Controllers\PublisherController.cs" />
     <Compile Include="Controllers\StartPageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Mapper\WebMapperProfile.cs" />
-    <Compile Include="Models\Admin\AdminViewModel.cs" />
+    <Compile Include="Models\ViewModels\Admin\AdminViewModel.cs" />
+    <Compile Include="Models\ViewModels\Contract\ContractDetailsViewModel.cs" />
+    <Compile Include="Models\ViewModels\Contract\ContractEditViewModel.cs" />
     <Compile Include="Models\ViewModels\Contract\ContractForConfirmationViewModel.cs" />
     <Compile Include="Models\ViewModels\Contract\ContractShortDetailsViewModel.cs" />
-    <Compile Include="Models\ViewModels\Contract\ContractViewModel.cs" />
+    <Compile Include="Models\ViewModels\Contract\PublisherApprovedContractShortViewModel.cs" />
+    <Compile Include="Models\ViewModels\Contract\PublisherContractShortViewModel.cs" />
+    <Compile Include="Models\ViewModels\Edition\EditionDetailsViewModel.cs" />
+    <Compile Include="Models\ViewModels\Edition\EditionEditViewModel.cs" />
+    <Compile Include="Models\ViewModels\Edition\EditionShortDetailsViewModel.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
+    <Compile Include="Models\ViewModels\Publisher\PublisherDetailsViewModel.cs" />
+    <Compile Include="Models\ViewModels\Publisher\PublisherEditViewModel.cs" />
+    <Compile Include="Models\ViewModels\Publisher\PublisherProfileViewModel.cs" />
     <Compile Include="Models\ViewModels\RegisterViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -251,19 +262,21 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
-    <Content Include="Views\Shared\_LayoutPublisher.cshtml" />
-    <Content Include="Views\StartPage\AdminHomePage.cshtml" />
-    <Content Include="Views\StartPage\PublisherHomePage.cshtml" />
-    <Content Include="Views\Shared\_LayoutSubscriber.cshtml" />
-    <Content Include="Views\StartPage\SubscriberHomePage.cshtml" />
     <Content Include="Views\Contract\CreateContract.cshtml" />
     <Content Include="Views\Contract\EditorTemplates\EditingContractViewModel.cshtml" />
-    <Content Include="Views\StartPage\DefaultHomePage.cshtml" />
     <Content Include="Views\Contract\Contracts.cshtml" />
-    <Content Include="Views\Contract\ContractDetails.cshtml" />
+    <Content Include="Views\Contract\ConfirmationContract.cshtml" />
     <Content Include="Views\Admin\AdminProfile.cshtml" />
     <Content Include="Views\Admin\EditAdminProfile.cshtml" />
+    <Content Include="Views\Publisher\EditPublisherProfile.cshtml" />
+    <Content Include="Views\Publisher\PublisherProfile.cshtml" />
+    <Content Include="Views\Publisher\PublisherDetails.cshtml" />
+    <Content Include="Views\Contract\PublisherContracts.cshtml" />
+    <Content Include="Views\Contract\ContractDetails.cshtml" />
+    <Content Include="Views\Contract\EditContract.cshtml" />
+    <Content Include="Views\Contract\ApprovedContractsForPublisher.cshtml" />
+    <Content Include="Views\Edition\CreateEdition.cshtml" />
+    <Content Include="Views\Edition\PublisherEditions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

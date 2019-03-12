@@ -22,3 +22,83 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.wrapper-content {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.content > h3 {
+    text-align: center;
+}
+
+.navigation {
+    /*width: 300px;*/
+}
+
+.navigation {
+    margin-top: 40px;
+    width: 200px;
+    padding: 20px;
+    list-style-type: none;
+    font-size: 14px;
+    border-right: 1px solid #ccc;
+    box-shadow: 0 0 5px #cccccc;
+}
+
+.navigation li:first-child {
+    font-weight: bold;
+}
+
+.confirmation-message {
+    border: 2px solid red;
+    padding: 30px;
+}
+
+.right {
+    float: right;
+    margin-top: 50px;
+}
+
+.navigation li {
+    margin-bottom: 7px;
+    font-size: 16px;
+}
+
+.navigation  li a:hover {
+    cursor: pointer;
+    color: red;
+}
+.form-group-text textarea {
+    max-width: 100%;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.content {
+    margin-left: 20px;
+    width: 100%;
+}
+
+.edit-profile {
+    font-size: 16px;
+    float: right;
+}
+
+.profile-info-bl {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.profile-info-name {
+    font-weight: bold;
+    margin-right: 15px;
+    min-width: 120px;
+}
+
+
+@media screen and (max-width: 640px) {
+    .wrapper-content {
+        flex-wrap: wrap;
+    }
+}

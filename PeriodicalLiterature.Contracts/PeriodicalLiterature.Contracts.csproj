@@ -47,7 +47,6 @@
     <Compile Include="Interfaces\Services\ICommentService.cs" />
     <Compile Include="Interfaces\Services\IContractResultService.cs" />
     <Compile Include="Interfaces\Services\IContractService.cs" />
-    <Compile Include="Interfaces\Services\IEditionResultService.cs" />
     <Compile Include="Interfaces\Services\IGenreService.cs" />
     <Compile Include="Interfaces\Services\IPublisherService.cs" />
     <Compile Include="Interfaces\Services\ISubscriberService.cs" />

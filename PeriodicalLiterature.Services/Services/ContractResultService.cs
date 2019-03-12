@@ -1,7 +1,9 @@
-﻿using System;
-using PeriodicalLiterature.Contracts.Interfaces.DAL;
+﻿using PeriodicalLiterature.Contracts.Interfaces.DAL;
 using PeriodicalLiterature.Contracts.Interfaces.Services;
 using PeriodicalLiterature.Models.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PeriodicalLiterature.Services.Services
 {
@@ -23,6 +25,14 @@ namespace PeriodicalLiterature.Services.Services
             _unitOfWork.GetRepository<ContractResult>().Add(contractResult);
 
             _unitOfWork.Save();
+        }
+
+        public IEnumerable<ContractResult> GetContractResultsByContractId(Guid contractId)
+        {
+            var contractResults = _unitOfWork.GetRepository<ContractResult>().GetMany(x => x.ContractId == contractId,
+                sort => sort.OrderBy(x => x.Date));
+
+            return contractResults;
         }
     }
 }

@@ -8,6 +8,10 @@ namespace PeriodicalLiterature.Services.MapperConfig
         public BLLMapperProfile()
         {
             CreateMap<Admin, Admin>();
+
+            CreateMap<Publisher, Publisher>();
+
+            CreateMap<Contract, Contract>();
         }
     }
 }

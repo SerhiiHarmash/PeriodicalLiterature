@@ -52,7 +52,6 @@
     <Compile Include="Services\CommentService.cs" />
     <Compile Include="Services\ContractResultService.cs" />
     <Compile Include="Services\ContractService.cs" />
-    <Compile Include="Services\EditionResultService.cs" />
     <Compile Include="Services\EditionService.cs" />
     <Compile Include="Services\GenreService.cs" />
     <Compile Include="Services\PublisherService.cs" />

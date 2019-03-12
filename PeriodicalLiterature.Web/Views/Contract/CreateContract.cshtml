@@ -1,8 +1,8 @@
-﻿@model PeriodicalLiterature.Web.Models.ViewModels.Contract.ContractViewModel
+﻿@model PeriodicalLiterature.Web.Models.ViewModels.Contract.ContractEditViewModel
 
 @{
     ViewBag.Title = "CreateContract";
-    Layout = "~/Views/Shared/_LayoutPublisher.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>CreateContract</h2>
@@ -14,8 +14,6 @@
 <div class="form-horizontal">
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-
 
     <div class="form-group">
         @Html.LabelFor(model => model.EditionTitle, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -64,7 +62,7 @@
             @Html.ValidationMessageFor(model => model.Periodicity, "", new { @class = "text-danger" })
         </div>
     </div>
-
+    
     <div class="form-group">
         @Html.LabelFor(model => model.ReleasePrice, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -106,12 +104,14 @@
 
 </div>
 }
+
 @section scripts
 {
     <script>
         $(".chosen-select").chosen({ allow_single_deselect: true });
     </script>
 }
+
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

@@ -1,0 +1,47 @@
+﻿@model IEnumerable<PeriodicalLiterature.Web.Models.ViewModels.Contract.PublisherContractShortViewModel>
+
+@{
+    ViewBag.Title = "PublisherContracts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>PublisherContracts</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>  
+
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+
+        <td>
+            @Html.ActionLink("Details", "GetContractDetails", new { contractId = item.Id }) 
+        </td>
+    </tr>
+}
+
+</table>

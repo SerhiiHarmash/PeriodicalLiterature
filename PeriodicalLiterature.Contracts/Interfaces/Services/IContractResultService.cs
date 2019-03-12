@@ -1,4 +1,6 @@
-﻿using PeriodicalLiterature.Models.Entities;
+﻿using System;
+using System.Collections.Generic;
+using PeriodicalLiterature.Models.Entities;
 
 namespace PeriodicalLiterature.Contracts.Interfaces.Services
 {
@@ -6,6 +8,6 @@ namespace PeriodicalLiterature.Contracts.Interfaces.Services
     {
         void AddContractResult(ContractResult contractResult);
 
-
+        IEnumerable<ContractResult> GetContractResultsByContractId(Guid contractId);
     }
 }

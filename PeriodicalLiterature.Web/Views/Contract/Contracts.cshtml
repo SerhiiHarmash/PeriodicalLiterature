@@ -3,7 +3,7 @@
 
 @{
     ViewBag.Title = "Contracts";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Contracts</h2>
@@ -15,7 +15,7 @@
             @Html.DisplayNameFor(model => model.Id)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PublisherId)
+           @Html.DisplayName("Publisher")
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Date)
@@ -35,7 +35,7 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PublisherId)
+                @Html.ActionLink(item.PublisherName, "GetPublisherDetails","Publisher", new{ publisherId = item.PublisherId }, null)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Date)
@@ -44,7 +44,7 @@
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                @Html.ActionLink("Details", "GetContractForApprove",new { contractId = item.Id })
+                @Html.ActionLink("Details", "GetContractForConfirmation",new { contractId = item.Id })
             </td>
         </tr>
     }

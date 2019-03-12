@@ -2,42 +2,39 @@
 
 @{
     ViewBag.Title = "AdminProfile";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Your profile</h2>
 
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        
-        <dt>
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Id)
-        </dd>
+<div class="wrapper-content">
+    <ul class="navigation">
+        <li>Menu</li>
+        <li><a>Publishers</a></li>
+        <li><a href="/Contract/GetAllContracts">Contracts</a></li>
+        <li><a>Contract results</a></li>
+        <li><a>Editions</a></li>
+    </ul>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SecondName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SecondName)
-        </dd>
-
-    </dl>
+    <div class="content">
+        <h3>Profile
+            <span class="edit-profile">
+                @Html.ActionLink("Edit profile", "EditProfile")
+            </span>
+        </h3>
+        <div class="profile-info-wrapper">
+            <div class="profile-info-bl">
+                <div class="profile-info-name"> @Html.DisplayNameFor(model => model.Id)</div>
+                <div class="profile-info-text">@Html.DisplayFor(model => model.Id)</div>
+            </div>
+            <div class="profile-info-bl">
+                <div class="profile-info-name"> @Html.DisplayNameFor(model => model.Name)</div>
+                <div class="profile-info-text">@Html.DisplayFor(model => model.Name)</div>
+            </div>
+            <div class="profile-info-bl">
+                <div class="profile-info-name"> @Html.DisplayNameFor(model => model.SecondName)</div>
+                <div class="profile-info-text">@Html.DisplayFor(model => model.SecondName)</div>
+            </div>
+        </div>
+    </div>
 </div>
-
-<p>
-    @Html.ActionLink("Edit profile", "EditProfile")
-</p>

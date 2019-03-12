@@ -115,7 +115,7 @@ namespace PeriodicalLiterature.Web.Controllers
 
                     if (string.IsNullOrEmpty(returnUrl))
                     {
-                        return RedirectToAction("Index", "StartPage");
+                        return RedirectToAction("OpenProfile");
                     }
                     return Redirect(returnUrl);
                 }
@@ -186,6 +186,25 @@ namespace PeriodicalLiterature.Web.Controllers
 
             return RedirectToAction("Index", "StartPage");
         }
+
+        public ActionResult OpenProfile()
+        {
+            if (User.IsInRole(Role.Admin.ToString()))
+            {
+                return RedirectToAction("GetProfile", "Admin");
+            }
+            if (User.IsInRole(Role.Publisher.ToString()))
+            {
+                return RedirectToAction("GetProfile", "Publisher");
+            }
+            if (User.IsInRole(Role.Subscriber.ToString()))
+            {
+                return RedirectToAction("GetProfile", "Subscriber");
+            }
+
+            return View();
+        }
+
 
 
         //public async Task<ActionResult> Edit()

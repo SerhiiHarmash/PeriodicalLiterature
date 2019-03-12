@@ -102,6 +102,18 @@
     <Compile Include="Migrations\201902251838511_renamefeld.Designer.cs">
       <DependentUpon>201902251838511_renamefeld.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903060837339_TableContractReleaseDay.cs" />
+    <Compile Include="Migrations\201903060837339_TableContractReleaseDay.Designer.cs">
+      <DependentUpon>201903060837339_TableContractReleaseDay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903061755417_DropColumn.cs" />
+    <Compile Include="Migrations\201903061755417_DropColumn.Designer.cs">
+      <DependentUpon>201903061755417_DropColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903121552109_changedTableEdition.cs" />
+    <Compile Include="Migrations\201903121552109_changedTableEdition.Designer.cs">
+      <DependentUpon>201903121552109_changedTableEdition.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PeriodicalLiteratureContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -137,6 +149,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902251838511_renamefeld.resx">
       <DependentUpon>201902251838511_renamefeld.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903060837339_TableContractReleaseDay.resx">
+      <DependentUpon>201903060837339_TableContractReleaseDay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903061755417_DropColumn.resx">
+      <DependentUpon>201903061755417_DropColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903121552109_changedTableEdition.resx">
+      <DependentUpon>201903121552109_changedTableEdition.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

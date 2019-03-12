@@ -2,11 +2,11 @@
 {
     public enum Periodicity
     {
-        Daily,
-        Weekly,
-        Monthly,
-        Quarterly,
-        SemiAnnual,
-        Annually
+        Daily = 1,
+        Weekly = 7,
+        Monthly= 30,
+        Quarterly = 90,
+        SemiAnnual = 180,
+        Annually = 360
     }
 }

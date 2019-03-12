@@ -12,5 +12,7 @@ namespace PeriodicalLiterature.Web.Models.ViewModels.Contract
         public Status Status { get; set; }
 
         public Guid PublisherId { get; set; }
+
+        public string PublisherName { get; set; }
     }
 }

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<PeriodicalLiterature.Web.Models.ViewModels.Contract.PublisherApprovedContractShortViewModel>
+
+@{
+    ViewBag.Title = "ApprovedContractsForPublisher";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Chose the contract</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Periodicity)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.LastReleaseDate)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.NextReleaseDate)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Periodicity)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.LastReleaseDate)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.LastReleaseDate)
+            </td>
+
+
+            @if (item.NextReleaseDate?.AddDays(-2) < DateTime.UtcNow || item.NextReleaseDate == null)
+            {
+                <td>
+                    @Html.ActionLink("Add edition", "AddEdition", "Edition",
+                        new {contractId = item.Id}, new { @class = "btn btn-success" })                     
+                </td>
+            }
+
+
+        </tr>
+    }
+
+</table>

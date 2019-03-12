@@ -1,15 +1,14 @@
-﻿using System;
+﻿using AutoMapper;
+using Microsoft.AspNet.Identity;
+using PeriodicalLiterature.Contracts.Interfaces.Services;
+using PeriodicalLiterature.Models.Entities;
+using PeriodicalLiterature.Models.Enums;
+using PeriodicalLiterature.Web.Models.ViewModels.Contract;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using PeriodicalLiterature.Contracts.Interfaces.Services;
 using System.Web.Mvc;
-using AutoMapper;
-using Microsoft.AspNet.Identity;
-using PeriodicalLiterature.Models.Entities;
-using PeriodicalLiterature.Models.Enums;
-using PeriodicalLiterature.Models.Filters;
-using PeriodicalLiterature.Web.Models.ViewModels.Contract;
 
 namespace PeriodicalLiterature.Web.Controllers
 {
@@ -18,24 +17,27 @@ namespace PeriodicalLiterature.Web.Controllers
         private readonly IGenreService _genreService;
         private readonly IContractService _contractService;
         private readonly IContractResultService _contractResultService;
+        private readonly IEditionService _editionService;
 
 
         public ContractController(
             IGenreService genreService,
             IContractService contractService,
-            IContractResultService contractResultService)
+            IContractResultService contractResultService,
+            IEditionService editionService)
         {
             _genreService = genreService;
             _contractService = contractService;
             _contractResultService = contractResultService;
+            _editionService = editionService;
         }
 
         [Authorize(Roles = "Admin")]
-        public ActionResult GetContractForApprove(Guid contractId)
+        public ActionResult GetContractForConfirmation(Guid contractId)
         {
             var contract = _contractService.GetContractById(contractId);
 
-            var contractView = new ContractViewModel();
+            var contractView = new ContractDetailsViewModel();
 
             Mapper.Map(contract, contractView);
 
@@ -44,12 +46,32 @@ namespace PeriodicalLiterature.Web.Controllers
                 Contract = contractView
             };
 
+            return View("ConfirmationContract", model);
+        }
+
+        [Authorize(Roles = "Publisher")]
+        public ActionResult GetContractDetails(Guid contractId)
+        {
+            var contract = _contractService.GetContractById(contractId);
+
+
+            var model = new ContractDetailsViewModel();
+
+            Mapper.Map(contract, model);
+
+            var contractsResults = _contractResultService.GetContractResultsByContractId(contractId).ToArray();
+
+            if (contractsResults.Length > 0)
+            {
+                model.ConfirmationMessage = contractsResults[0].Message;
+            }
+
             return View("ContractDetails", model);
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public ActionResult GetContractForApprove(ContractForConfirmationViewModel model)
+        public ActionResult MakeConfirmation(ContractForConfirmationViewModel model)
         {
             model.AdminId = new Guid(User.Identity.GetUserId());
 
@@ -64,6 +86,8 @@ namespace PeriodicalLiterature.Web.Controllers
             return RedirectToAction("GetAllContracts");
         }
 
+
+
         [Authorize(Roles = "Admin")]
         public ActionResult GetAllContracts()
         {
@@ -72,34 +96,26 @@ namespace PeriodicalLiterature.Web.Controllers
             var model = new List<ContractShortDetailsViewModel>();
 
             Mapper.Map(contracts, model);
-            
-            return View("Contracts", model);
-        }
 
-        [Authorize(Roles = "Admin")]
-        [HttpPost]
-        public ActionResult GetAllContracts(ContractFilterCriteria filterCriteria)
-        {
-            var contracts = _contractService.GetAllContracts(filterCriteria);
-            return View();
+            return View("Contracts", model);
         }
 
         [Authorize(Roles = "Publisher")]
         public ActionResult CreateContract()
         {
-            var model = new ContractViewModel();
-            ConfigurateBaseDateForContractViewModel(model);
+            var model = new ContractEditViewModel();
+            ConfigureBaseDateForContractViewModel(model);
 
             return View(model);
-        }  
+        }
 
         [HttpPost]
         [Authorize(Roles = "Publisher")]
-        public ActionResult CreateContract(ContractViewModel model)
+        public ActionResult CreateContract(ContractEditViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                ConfigurateBaseDateForContractViewModel(model);
+                ConfigureBaseDateForContractViewModel(model);
 
                 return View(model);
             }
@@ -108,7 +124,7 @@ namespace PeriodicalLiterature.Web.Controllers
 
             if (!(extensionCover == ".png" || extensionCover == ".jpg"))
             {
-                ConfigurateBaseDateForContractViewModel(model);
+                ConfigureBaseDateForContractViewModel(model);
                 ModelState.AddModelError("", @"Extension for cover should be '.png' or '.jpg'");
 
                 return View(model);
@@ -118,7 +134,7 @@ namespace PeriodicalLiterature.Web.Controllers
 
             if (extensionFile != ".pdf")
             {
-                ConfigurateBaseDateForContractViewModel(model);
+                ConfigureBaseDateForContractViewModel(model);
                 ModelState.AddModelError("", @"Extension for file should be '.pdf'");
 
                 return View(model);
@@ -141,13 +157,98 @@ namespace PeriodicalLiterature.Web.Controllers
             return messageResult;
         }
 
-        private void ConfigurateBaseDateForContractViewModel(ContractViewModel model)
+        public ActionResult GetApprovedContractsByPublisherId(Guid publisherId)
+        {
+            var contracts = _contractService.GetApprovedContractsByPublisherId(publisherId);
+
+            var model = new List<PublisherApprovedContractShortViewModel>();
+
+            Mapper.Map(contracts, model);
+
+            return View("ApprovedContractsForPublisher", model);
+        }
+
+        public ActionResult GetAllContractsByPublisherId(Guid publisherId)
+        {
+            var contracts = _contractService.GetAllContractsByPublisherId(publisherId);
+
+            var model = new List<PublisherContractShortViewModel>();
+
+            Mapper.Map(contracts, model);
+
+            return View("PublisherContracts", model);
+        }
+
+        public ActionResult EditContract(Guid contractId)
+        {
+            var contract = _contractService.GetContractById(contractId);
+
+            var model = new ContractEditViewModel();
+
+            Mapper.Map(contract, model);
+
+            ConfigureBaseDateForContractViewModel(model);
+
+            return View("EditContract", model);
+        }
+
+        [HttpPost]
+        public ActionResult EditContract(ContractEditViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                ConfigureBaseDateForContractViewModel(model);
+
+                return View(model);
+            }
+
+            if (model.Cover != null)
+            {
+                var extensionCover = Path.GetExtension(model.Cover.FileName);
+
+                if (!(extensionCover == ".png" || extensionCover == ".jpg"))
+                {
+                    ConfigureBaseDateForContractViewModel(model);
+                    ModelState.AddModelError("", @"Extension for cover should be '.png' or '.jpg'");
+
+                    return View(model);
+                }
+
+                model.CoverName = Guid.NewGuid() + extensionCover;
+                model.Cover.SaveAs(Server.MapPath("../Storage/" + model.CoverName));
+            }
+
+            if (model.File != null)
+            {
+                var extensionFile = Path.GetExtension(model.File.FileName);
+
+                if (extensionFile != ".pdf")
+                {
+                    ConfigureBaseDateForContractViewModel(model);
+                    ModelState.AddModelError("", @"Extension for file should be '.pdf'");
+
+                    return View(model);
+                }
+
+                model.FileName = Guid.NewGuid() + extensionFile;
+                model.File.SaveAs(Server.MapPath("../Storage/" + model.FileName));
+            }
+
+            var contract = new Contract();
+            Mapper.Map(model, contract);
+
+            _contractService.EditContract(contract, model.Genres);
+
+            return RedirectToAction("GetAllContractsByPublisherId", new { publisherId = model.PublisherId });
+        }
+
+        private void ConfigureBaseDateForContractViewModel(ContractEditViewModel model)
         {
             var genres = _genreService.GetAllGenres().Select(genre => genre.Name);
             model.GenreMultiSelectList = new MultiSelectList(genres);
             model.CategorySelectList = EnumToSelectList<Category>();
             model.LanguageSelectList = EnumToSelectList<Language>();
-            model.PeriodicitySelectList = EnumToSelectList<Periodicity>();
+            model.PeriodicitySelectList = EnumToSelectList<Periodicity>();         
         }
 
         private SelectList EnumToSelectList<T>() where T : struct

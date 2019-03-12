@@ -1,0 +1,68 @@
+﻿@model PeriodicalLiterature.Web.Models.ViewModels.Publisher.PublisherProfileViewModel
+
+@{
+    ViewBag.Title = "PublisherProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="wrapper-content">
+    <ul class="navigation">
+        <li>Menu</li>
+        <li>
+            <a onclick="return CheckPublisherHaveNotInformationYourself('@Model.Description','@Model.Name')"
+               href="/Contract/CreateContract">Create contract</a>
+        </li>
+        <li><a href="/Contract/GetAllContractsByPublisherId?publisherId=@Model.Id">My contract</a></li>
+        <li><a href="/Contract/GetApprovedContractsByPublisherId?publisherId=@Model.Id">Add edition</a></li>
+        <li><a href="/Edition/GetAllEditionsForPublisher">Editions</a></li>
+    </ul>
+
+
+    <div class="content">
+        <h3>Profile
+        <span class="edit-profile">
+            @Html.ActionLink("Edit profile", "EditProfile")
+        </span>
+        </h3>
+          <div class="profile-info-wrapper">
+            <div class="profile-info-bl">
+                <div class="profile-info-name"> @Html.DisplayNameFor(model => model.Id)</div>
+                <div class="profile-info-text">@Html.DisplayFor(model => model.Id)</div>
+            </div>
+            <div class="profile-info-bl">
+                <div class="profile-info-name"> @Html.DisplayNameFor(model => model.Name)</div>
+                <div class="profile-info-text">@Html.DisplayFor(model => model.Name)</div>
+            </div>
+            <div class="profile-info-bl">
+                <div class="profile-info-name"> @Html.DisplayNameFor(model => model.Country)</div>
+                <div class="profile-info-text">@Html.DisplayFor(model => model.Country)</div>
+            </div>
+            <div class="profile-info-bl">
+                <div class="profile-info-name"> @Html.DisplayNameFor(model => model.Account)</div>
+                <div class="profile-info-text">@Html.DisplayFor(model => model.Account)</div>
+            </div>
+            <div class="profile-info-bl">
+                <div class="profile-info-name"> @Html.DisplayNameFor(model => model.PlannedAccount)</div>
+                <div class="profile-info-text">@Html.DisplayFor(model => model.PlannedAccount)</div>
+            </div>
+              <div class="profile-info-bl">
+                  <div class="profile-info-name"> @Html.DisplayNameFor(model => model.Description)</div>
+                  <div class="profile-info-text">@Html.DisplayFor(model => model.Description)</div>
+              </div>
+          </div>
+    </div>
+</div>
+
+
+@section scripts
+{
+
+    <script>
+        function CheckPublisherHaveNotInformationYourself(value, value2) {
+            if (value === "" || value2 === "") {
+                alert("Could you please fill out company information");
+                return false;
+            }
+        }
+    </script>
+}

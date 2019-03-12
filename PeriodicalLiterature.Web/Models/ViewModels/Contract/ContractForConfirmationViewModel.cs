@@ -1,12 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using PeriodicalLiterature.Models.Entities;
 
 namespace PeriodicalLiterature.Web.Models.ViewModels.Contract
 {
     public class ContractForConfirmationViewModel
     {
-        public ContractViewModel Contract { get; set; }
+        public ContractDetailsViewModel Contract { get; set; }
 
         [DataType(DataType.MultilineText)]
         public string Message { get; set; }
@@ -15,6 +14,6 @@ namespace PeriodicalLiterature.Web.Models.ViewModels.Contract
 
         public Guid AdminId { get; set; }
 
-        public Guid ContractId { get; set;  }
+        public Guid ContractId { get; set; }
     }
 }

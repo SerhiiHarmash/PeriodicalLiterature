@@ -12,6 +12,12 @@ namespace PeriodicalLiterature.Contracts.Interfaces.Services
 
         Contract GetContractById(Guid id);
 
+        void EditContract(Contract contract, ICollection<string> genres);
+
+        IEnumerable<Contract> GetAllContractsByPublisherId(Guid publisherId);
+
+        IEnumerable<Contract> GetApprovedContractsByPublisherId(Guid publisherId);
+
         void ChangeStatus(Guid contractId, Status newStatus);
 
         IEnumerable<Contract> GetAllContracts(ContractFilterCriteria filterCriteria = null);

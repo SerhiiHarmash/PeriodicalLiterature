@@ -5,6 +5,7 @@ using PeriodicalLiterature.Models.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using PeriodicalLiterature.Models.Enums;
 
 namespace PeriodicalLiterature.Services.Services
@@ -31,11 +32,44 @@ namespace PeriodicalLiterature.Services.Services
             _unitOfWork.Save();
         }
 
+        public void EditContract(Contract contract, ICollection<string> genres)
+        {
+            var contractEntity = _unitOfWork.GetRepository<Contract>()
+                .GetSingle(x => x.Id == contract.Id,i=>i.Genres);
+
+            Mapper.Map(contract, contractEntity);
+
+            contractEntity.Genres = _unitOfWork.GetRepository<Genre>()
+                .GetMany(genre => genres.Contains(genre.Name)).ToList();
+
+            _unitOfWork.GetRepository<Contract>().Update(contractEntity);
+
+            _unitOfWork.Save();
+        }
+
+        
+
+        public IEnumerable<Contract> GetAllContractsByPublisherId(Guid publisherId)
+        {
+            var contracts = _unitOfWork.GetRepository<Contract>().GetMany(x => x.PublisherId == publisherId,
+                null, null, null, i=>i.Publisher);
+
+            return contracts;
+        }
+
+        public IEnumerable<Contract> GetApprovedContractsByPublisherId(Guid publisherId)
+        {
+            var contracts = _unitOfWork.GetRepository<Contract>()
+                .GetMany(x => x.PublisherId == publisherId && x.Status == Status.Approved, null, null, null, i=>i.Editions);
+
+            return contracts;
+        }
+
         public IEnumerable<Contract> GetAllContracts(ContractFilterCriteria filterCriteria = null)
         {
             if (filterCriteria == null)
             {
-                var contracts = _unitOfWork.GetRepository<Contract>().GetMany();
+                var contracts = _unitOfWork.GetRepository<Contract>().GetMany(null,null,null,null,i=>i.Publisher);
 
                 return contracts;
             }
@@ -63,14 +97,6 @@ namespace PeriodicalLiterature.Services.Services
             _unitOfWork.Save();
         }
 
-        public void EditContract(Contract contract, ICollection<string> genres)
-        {
-            //contract.Genres = _unitOfWork.GetRepository<Genre>()
-            //    .GetMany(genre => genres.Contains(genre.Name)).ToList();
-
-            //_unitOfWork.GetRepository<Contract>().Add(contract);
-
-            //_unitOfWork.Save();
-        }
+      
     }
 }

@@ -6,13 +6,13 @@ namespace PeriodicalLiterature.Models.Entities
 {
     public class Edition : BaseEntity
     {
-        public Status Status { get; set; }
-
         public Guid ContractId { get; set; }
 
-        public virtual Contract Contract { get; set; }
+        public Contract Contract { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateTime AddingDate { get; set; }
+
+        public DateTime ReleaseDate { get; set; }
 
         public byte Number { get; set; }
 
@@ -20,9 +20,9 @@ namespace PeriodicalLiterature.Models.Entities
 
         public byte Pages { get; set; }
 
-        public Guid CoverId { get; set; }
+        public string CoverName { get; set; }
 
-        public Guid FileId { get; set; }
+        public string FileName { get; set; }
 
         public double Rating { get; set; }
 

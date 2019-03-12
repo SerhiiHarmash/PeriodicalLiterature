@@ -1,12 +1,13 @@
-﻿using System;
+﻿using PeriodicalLiterature.Models.Entities;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PeriodicalLiterature.Contracts.Interfaces.Services
 {
     public interface IEditionService
     {
+        void AddEdition(Edition edition);
+
+        IEnumerable<Edition> GetEditionsByPublisherId(Guid publisherId);
     }
 }

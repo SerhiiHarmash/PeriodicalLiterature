@@ -1,6 +1,8 @@
 ﻿using PeriodicalLiterature.Models.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace PeriodicalLiterature.Models.Entities
 {
@@ -25,6 +27,12 @@ namespace PeriodicalLiterature.Models.Entities
         public decimal ReleasePrice { get; set; }
 
         public string FileName { get; set; }
+
+        [NotMapped]
+        public DateTime? LastReleaseDate => Editions?.OrderByDescending(x => x.ReleaseDate).FirstOrDefault()?.ReleaseDate;
+
+        [NotMapped]
+        public DateTime? NextReleaseDate => LastReleaseDate?.AddDays((int)Periodicity);
 
         public ICollection<Edition> Editions { get; set; }
 

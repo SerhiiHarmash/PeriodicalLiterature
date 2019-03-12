@@ -64,6 +64,8 @@
     <Compile Include="Enums\Language.cs" />
     <Compile Include="Enums\Periodicity.cs" />
     <Compile Include="Enums\RegisterRole.cs" />
+    <Compile Include="Enums\ReleaseDay.cs" />
+    <Compile Include="Enums\Role.cs" />
     <Compile Include="Enums\Status.cs" />
     <Compile Include="Filters\ContractFilterCriteria.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

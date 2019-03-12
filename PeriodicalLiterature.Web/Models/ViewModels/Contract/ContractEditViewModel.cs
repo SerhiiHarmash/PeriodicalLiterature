@@ -2,24 +2,22 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.Mvc;
-using PeriodicalLiterature.Models.Entities;
 
 namespace PeriodicalLiterature.Web.Models.ViewModels.Contract
 {
-    public class ContractViewModel
+    public class ContractEditViewModel
     {
         public Guid Id { get; set; }
 
         public Guid PublisherId { get; set; }
 
-        public Publisher Publisher { get; set; }
+        public string PublisherName { get; set; }
 
         [Required(ErrorMessage = "Edition title is required")]
         [Display(Name = "Edition title")]
-        [StringLength(200, MinimumLength = 1, ErrorMessage = "Discription should be range of 1 to 200 symbol")]
+        [StringLength(200, MinimumLength = 1, ErrorMessage = "Description should be range of 1 to 200 symbol")]
         public string EditionTitle { get; set; }
 
         [Required(ErrorMessage = "Category is required")]
@@ -46,10 +44,14 @@ namespace PeriodicalLiterature.Web.Models.ViewModels.Contract
 
         public SelectList PeriodicitySelectList { get; set; }
 
+        public ReleaseDay ReleaseDay { get; set; }
+
+        public SelectList ReleaseDaySelectList { get; set; }
+
         [Required(ErrorMessage = "Description of the edition is required")]
         [DataType(DataType.MultilineText)]
         [Display(Name = "Description of the edition")]
-        [StringLength(2000, MinimumLength = 100, ErrorMessage = "Discription should be range of 100 to 2000 symbol")]
+        [StringLength(2000, MinimumLength = 100, ErrorMessage = "Description should be range of 100 to 2000 symbol")]
         public string DescriptionEdition { get; set; }
 
         [Required(ErrorMessage = "Price of one edition is required")]
@@ -57,12 +59,10 @@ namespace PeriodicalLiterature.Web.Models.ViewModels.Contract
         [DataType(DataType.Currency)]
         public decimal ReleasePrice { get; set; }
 
-        [Required(ErrorMessage = "Cover is required")]
         public HttpPostedFileBase Cover { get; set; }
 
         public string CoverName { get; set; }
-
-        [Required(ErrorMessage = "File is required")]
+        
         public HttpPostedFileBase File { get; set; }
 
         public string FileName { get; set; }

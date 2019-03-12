@@ -1,0 +1,148 @@
+﻿@model PeriodicalLiterature.Web.Models.ViewModels.Contract.ContractForConfirmationViewModel
+@using PeriodicalLiterature.Models.Enums
+
+@{
+    ViewBag.Title = "ContractDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="display: inline-block">Contract details</h2>
+
+<p> <b>Status:</b>@Model.Contract.Status</p>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Contract.EditionTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contract.EditionTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Publisher")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contract.PublisherId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Contract.Language)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contract.Language)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Contract.Periodicity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contract.Periodicity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Contract.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contract.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Contract.Genres)
+        </dt>
+
+        <dd>
+            <ul>
+                @foreach (var genre in Model.Contract.Genres)
+                {
+                    <li>@genre</li>
+                }
+            </ul>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Contract.ReleasePrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contract.ReleasePrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Cover example")
+        </dt>
+
+        <dd>
+            <a href="~/Storage/@Model.Contract.CoverName" target="_blank">Open</a>
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Edition issue example")
+        </dt>
+
+        <dd>
+            <a href="~/Storage/@Model.Contract.FileName" target="_blank">Open</a>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Contract.DescriptionEdition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contract.DescriptionEdition)
+        </dd>
+
+    </dl>
+
+    <div>
+        @using (Html.BeginForm("MakeConfirmation", "Contract", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.HiddenFor(model => model.ConfirmationResult)
+
+            @Html.HiddenFor(model => model.ContractId, Model.Contract.Id)
+
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.LabelFor(model => model.Message)
+                </dt>
+
+                <dd>
+                    <div class="form-group-wrapper">
+                        <div class="form-group-bl">
+                           
+                            <div class="form-group-text">
+                                @Html.EditorFor(model => model.Message, new { htmlAttributes = new { @class = "", rows = "5" } })
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-success" onclick="SetValueToConfirmationResult(true)">Confirm</button>
+
+                        <button type="submit" class="btn btn-danger" onclick="SetValueToConfirmationResult(false)">Refuse</button>
+                    </div>
+                </dd>
+            </dl>
+            
+        }
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        function SetValueToConfirmationResult(value) {
+            document.getElementById("ConfirmationResult").setAttribute("value", value);
+        }
+    </script>
+}
+

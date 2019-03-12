@@ -1,67 +1,66 @@
-﻿@model PeriodicalLiterature.Web.Models.ViewModels.Contract.ContractForConfirmationViewModel
+﻿@model PeriodicalLiterature.Web.Models.ViewModels.Contract.ContractDetailsViewModel
 @using PeriodicalLiterature.Models.Enums
 
 @{
     ViewBag.Title = "ContractDetails";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2 style="display: inline-block">Contract details</h2>
-   
-<p> <b>Status:</b> @Model.Contract.Status</p>
+@Html.ActionLink("Edit", "EditContract", "Contract", new{contractId = Model.Id}, new{@class = "right"})
+
+<p> <b>Status:</b>@Model.Status</p>
 
 <div>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Contract.EditionTitle)
+            @Html.DisplayNameFor(model => model.EditionTitle)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Contract.EditionTitle)
+            @Html.DisplayFor(model => model.EditionTitle)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Contract.Publisher)
+            @Html.DisplayName("Publisher")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Contract.PublisherId)
+            @Html.DisplayFor(model => model.PublisherId)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Contract.Language)
+            @Html.DisplayNameFor(model => model.Language)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Contract.Language)
+            @Html.DisplayFor(model => model.Language)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Contract.Periodicity)
+            @Html.DisplayNameFor(model => model.Periodicity)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Contract.Periodicity)
+            @Html.DisplayFor(model => model.Periodicity)
         </dd>
-        
+       
         <dt>
-            @Html.DisplayNameFor(model => model.Contract.Date)
+            @Html.DisplayNameFor(model => model.Date)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Contract.Date)
+            @Html.DisplayFor(model => model.Date)
         </dd>
 
-     
-
         <dt>
-            @Html.DisplayNameFor(model => model.Contract.Genres)
+            @Html.DisplayNameFor(model => model.Genres)
         </dt>
 
         <dd>
             <ul>
-                @foreach (var genre in Model.Contract.Genres)
+                @foreach (var genre in Model.Genres)
                 {
                     <li>@genre</li>
                 }
@@ -69,11 +68,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Contract.ReleasePrice)
+            @Html.DisplayNameFor(model => model.ReleasePrice)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Contract.ReleasePrice)
+            @Html.DisplayFor(model => model.ReleasePrice)
         </dd>
 
         <dt>
@@ -81,7 +80,7 @@
         </dt>
 
         <dd>
-            <a href="~/Storage/@Model.Contract.CoverName" target="_blank">Open</a>
+            <a href="~/Storage/@Model.CoverName" target="_blank">Open</a>
         </dd>
 
         <dt>
@@ -89,53 +88,26 @@
         </dt>
 
         <dd>
-            <a href="~/Storage/@Model.Contract.FileName" target="_blank">Open</a>
+            <a href="~/Storage/@Model.FileName" target="_blank">Open</a>
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Contract.DescriptionEdition)
+            @Html.DisplayNameFor(model => model.DescriptionEdition)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Contract.DescriptionEdition)
+            @Html.DisplayFor(model => model.DescriptionEdition)
         </dd>
 
     </dl>
-
-    <div>
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-            @Html.HiddenFor(model => model.ConfirmationResult)
-
-            @Html.HiddenFor(model => model.ContractId, Model.Contract.Id)
-
-            <div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Message)
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Message, new { htmlAttributes = new { @class = "form-control", rows = "5" } })
-                    </div>
-                </div>
-
-                <button type="submit" class="btn btn-success" onclick="SetValueToConfirmationResult(true)">Confirm</button>
-
-                <button type="submit" class="btn btn-danger" onclick="SetValueToConfirmationResult(false)">Refuse</button>
-            </div>
-        }
-    </div>
 </div>
 
-@section scripts
+@if (Model.ConfirmationMessage != null)
 {
-    <script>
-        function SetValueToConfirmationResult(value) {
-            document.getElementById("ConfirmationResult").setAttribute("value", value);
-        }
-    </script>
+    <div class="confirmation-message">
+        <p>Recommendation</p>
+        <p> @Model.ConfirmationMessage</p>
+    </div>
 }
+
 

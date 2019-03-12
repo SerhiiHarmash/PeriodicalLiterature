@@ -5,7 +5,7 @@ using AutoMapper;
 using Microsoft.AspNet.Identity;
 using PeriodicalLiterature.Contracts.Interfaces.Services;
 using PeriodicalLiterature.Models.Entities;
-using PeriodicalLiterature.Web.Models.Admin;
+using PeriodicalLiterature.Web.Models.ViewModels.Admin;
 
 namespace PeriodicalLiterature.Web.Controllers
 {
@@ -17,9 +17,8 @@ namespace PeriodicalLiterature.Web.Controllers
         {
             _adminService = adminService;
         }
-
         
-        public ActionResult GetAdmin()
+        public ActionResult GetProfile()
         {
             var adminId = new Guid(User.Identity.GetUserId());
 
@@ -57,7 +56,7 @@ namespace PeriodicalLiterature.Web.Controllers
 
             _adminService.EditAdmin(admin);
 
-            return RedirectToAction("GetAdmin");
+            return RedirectToAction("GetProfile");
         }
     }
 }

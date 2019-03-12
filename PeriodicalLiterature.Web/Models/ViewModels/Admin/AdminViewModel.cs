@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace PeriodicalLiterature.Web.Models.Admin
+namespace PeriodicalLiterature.Web.Models.ViewModels.Admin
 {
     public class AdminViewModel
     {
