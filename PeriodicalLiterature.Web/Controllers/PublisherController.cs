@@ -19,6 +19,7 @@ namespace PeriodicalLiterature.Web.Controllers
             _publisherService = publisherService;
         }
 
+        [Authorize(Roles = "Publisher")]
         public ActionResult GetProfile()
         {
             var publisherId = new Guid(User.Identity.GetUserId());
@@ -31,7 +32,7 @@ namespace PeriodicalLiterature.Web.Controllers
 
             return View("PublisherProfile", model);
         }
-
+       
         public ActionResult GetPublisherDetails(Guid publisherId)
         {
             var publisher = _publisherService.GetPublisher(publisherId);
@@ -43,6 +44,7 @@ namespace PeriodicalLiterature.Web.Controllers
             return View("PublisherDetails", model);
         }
 
+        [Authorize(Roles = "Publisher")]
         public ActionResult EditProfile()
         {
             var publisherId = new Guid(User.Identity.GetUserId());
@@ -59,7 +61,9 @@ namespace PeriodicalLiterature.Web.Controllers
             return View("EditPublisherProfile", model);
         }
 
+
         [HttpPost]
+        [Authorize(Roles = "Publisher")]
         public ActionResult EditProfile(PublisherEditViewModel model)
         {
             var publisher = new Publisher();

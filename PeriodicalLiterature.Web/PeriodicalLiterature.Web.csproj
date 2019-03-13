@@ -203,6 +203,7 @@
     <Compile Include="Controllers\EditionController.cs" />
     <Compile Include="Controllers\PublisherController.cs" />
     <Compile Include="Controllers\StartPageController.cs" />
+    <Compile Include="Controllers\SubscriberController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -222,6 +223,7 @@
     <Compile Include="Models\ViewModels\Publisher\PublisherEditViewModel.cs" />
     <Compile Include="Models\ViewModels\Publisher\PublisherProfileViewModel.cs" />
     <Compile Include="Models\ViewModels\RegisterViewModel.cs" />
+    <Compile Include="Models\ViewModels\Subscriber\PublisherProfileViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -277,6 +279,7 @@
     <Content Include="Views\Contract\ApprovedContractsForPublisher.cshtml" />
     <Content Include="Views\Edition\CreateEdition.cshtml" />
     <Content Include="Views\Edition\PublisherEditions.cshtml" />
+    <Content Include="Views\Edition\EditionDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

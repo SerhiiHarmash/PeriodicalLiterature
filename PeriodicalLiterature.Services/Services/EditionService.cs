@@ -41,5 +41,13 @@ namespace PeriodicalLiterature.Services.Services
 
             return editions;
         }
+
+        public Edition GetEditionById(Guid editionId)
+        {
+            var edition = _unitOfWork.GetRepository<Edition>()
+                .GetSingle(x => x.Id == editionId, i => i.Contract.Genres);
+
+            return edition;
+        }
     }
 }

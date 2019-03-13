@@ -1,4 +1,5 @@
-﻿using PeriodicalLiterature.Contracts.Interfaces.DAL;
+﻿using System;
+using PeriodicalLiterature.Contracts.Interfaces.DAL;
 using PeriodicalLiterature.Contracts.Interfaces.Services;
 using PeriodicalLiterature.Models.Entities;
 
@@ -19,5 +20,9 @@ namespace PeriodicalLiterature.Services.Services
             _unitOfWork.Save();
         }
 
+        public Subscriber GetSubscriber(Guid publisherId)
+        {
+            var sbscriber = _unitOfWork.GetRepository<Subscriber>().GetSingle(x=>x.)
+        }
     }
 }

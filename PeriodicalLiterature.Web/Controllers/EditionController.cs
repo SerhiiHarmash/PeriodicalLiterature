@@ -1,21 +1,21 @@
-﻿using PeriodicalLiterature.Contracts.Interfaces.Services;
+﻿using AutoMapper;
+using Microsoft.AspNet.Identity;
+using PeriodicalLiterature.Contracts.Interfaces.Services;
+using PeriodicalLiterature.Models.Entities;
+using PeriodicalLiterature.Web.Models.ViewModels.Edition;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Web.Mvc;
-using AutoMapper;
-using Microsoft.AspNet.Identity;
-using PeriodicalLiterature.Models.Entities;
-using PeriodicalLiterature.Web.Models.ViewModels.Edition;
 
 namespace PeriodicalLiterature.Web.Controllers
 {
     public class EditionController : Controller
-    {     
+    {
         private readonly IEditionService _editionService;
         private readonly IContractService _contractService;
 
-        public EditionController(          
+        public EditionController(
             IEditionService editionService,
             IContractService contractService)
         {
@@ -31,13 +31,13 @@ namespace PeriodicalLiterature.Web.Controllers
                 ContractId = contractId
             };
 
-            return View("CreateEdition",model);
+            return View("CreateEdition", model);
         }
 
         [HttpPost]
         [Authorize(Roles = "Publisher")]
         public ActionResult AddEdition(EditionEditViewModel model)
-        {           
+        {
             if (!ModelState.IsValid)
             {
                 return View("CreateEdition", model);
@@ -46,7 +46,7 @@ namespace PeriodicalLiterature.Web.Controllers
             var extensionCover = Path.GetExtension(model.Cover.FileName);
 
             if (!(extensionCover == ".png" || extensionCover == ".jpg"))
-            {   
+            {
                 ModelState.AddModelError("", @"Extension for cover should be '.png' or '.jpg'");
 
                 return View("CreateEdition", model);
@@ -55,7 +55,7 @@ namespace PeriodicalLiterature.Web.Controllers
             var extensionFile = Path.GetExtension(model.File.FileName);
 
             if (extensionFile != ".pdf")
-            {               
+            {
                 ModelState.AddModelError("", @"Extension for file should be '.pdf'");
 
                 return View("CreateEdition", model);
@@ -73,7 +73,7 @@ namespace PeriodicalLiterature.Web.Controllers
 
             _editionService.AddEdition(edition);
 
-            RedirectToAction("GetAllEditionsForPublisher");
+            return RedirectToAction("GetAllEditionsForPublisher");
         }
 
         [Authorize(Roles = "Publisher")]
@@ -87,7 +87,20 @@ namespace PeriodicalLiterature.Web.Controllers
 
             Mapper.Map(editions, model);
 
-            return View("PublisherEditions",model);
+            return View("PublisherEditions", model);
         }
+
+        [Authorize(Roles = "Publisher")]
+        public ActionResult GetEditionDetails(Guid editionId)
+        {
+            var edition = _editionService.GetEditionById(editionId);
+
+            var model = new EditionDetailsViewModel();
+
+            Mapper.Map(edition, model);
+
+            return View("EditionDetails", model);
+        }
+
     }
 }

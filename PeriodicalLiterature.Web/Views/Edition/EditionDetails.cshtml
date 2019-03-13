@@ -1,0 +1,131 @@
+﻿@model PeriodicalLiterature.Web.Models.ViewModels.Edition.EditionDetailsViewModel
+
+@{
+    ViewBag.Title = "Edition";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edition</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContractId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContractId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AddingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReleaseDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Genres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Genres)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Language)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Language)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Periodicity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Periodicity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Genres)
+        </dt>
+
+        <dd>
+            <ul>
+                @foreach (var genre in Model.Genres)
+                {
+                    <li>@genre</li>
+                }
+            </ul>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pages)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pages)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Cover example")
+        </dt>
+
+        <dd>
+            <a href="~/Storage/@Model.CoverName" target="_blank">Open</a>
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Edition issue example")
+        </dt>
+
+        <dd>
+            <a href="~/Storage/@Model.FileName" target="_blank">Open</a>
+        </dd>
+
+    </dl>
+</div>

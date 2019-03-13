@@ -9,5 +9,7 @@ namespace PeriodicalLiterature.Contracts.Interfaces.Services
         void AddEdition(Edition edition);
 
         IEnumerable<Edition> GetEditionsByPublisherId(Guid publisherId);
+
+        Edition GetEditionById(Guid editionId);
     }
 }

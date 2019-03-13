@@ -55,6 +55,17 @@ namespace PeriodicalLiterature.Web.Infrastructure.Mapper
 
             CreateMap<EditionEditViewModel, Edition>();
 
+            CreateMap<Edition, EditionDetailsViewModel>()
+                .ForMember(model => model.Genres,
+                    opt => opt.MapFrom(edition => edition.Contract.Genres.Select(genre => genre.Name)))
+                .ForMember(model=>model.Periodicity,
+                    opt=> opt.MapFrom(edition=>edition.Contract.Periodicity.ToString()))
+                .ForMember(model => model.Language,
+                    opt => opt.MapFrom(edition => edition.Contract.Language.ToString()))
+                .ForMember(model => model.Category,
+                    opt => opt.MapFrom(edition => edition.Contract.Category.ToString()));
+
+
             CreateMap<Edition, EditionShortDetailsViewModel>()
                 .ForMember(model=>model.PublisherName, opt=>opt
                     .MapFrom(edition=>edition.Contract.Publisher.Name));
