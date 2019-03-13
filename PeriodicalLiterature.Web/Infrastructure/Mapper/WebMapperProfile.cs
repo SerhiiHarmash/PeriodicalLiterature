@@ -6,6 +6,7 @@ using PeriodicalLiterature.Web.Models.ViewModels.Admin;
 using PeriodicalLiterature.Web.Models.ViewModels.Contract;
 using PeriodicalLiterature.Web.Models.ViewModels.Edition;
 using PeriodicalLiterature.Web.Models.ViewModels.Publisher;
+using PeriodicalLiterature.Web.Models.ViewModels.Subscriber;
 
 namespace PeriodicalLiterature.Web.Infrastructure.Mapper
 {
@@ -69,6 +70,12 @@ namespace PeriodicalLiterature.Web.Infrastructure.Mapper
             CreateMap<Edition, EditionShortDetailsViewModel>()
                 .ForMember(model=>model.PublisherName, opt=>opt
                     .MapFrom(edition=>edition.Contract.Publisher.Name));
+
+            CreateMap<Subscriber, SubscriberProfileViewModel>();
+
+            CreateMap<SubscriberEditViewModel, Subscriber>();
+
+            CreateMap<Subscriber, SubscriberDetailsViewModel>();
         }
     }
 }

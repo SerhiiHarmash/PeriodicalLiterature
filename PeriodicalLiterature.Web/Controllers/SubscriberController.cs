@@ -1,8 +1,11 @@
-﻿using System;
-using System.Web.Mvc;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNet.Identity;
 using PeriodicalLiterature.Contracts.Interfaces.Services;
+using PeriodicalLiterature.Models.Entities;
+using PeriodicalLiterature.Web.Models.ViewModels.Publisher;
+using PeriodicalLiterature.Web.Models.ViewModels.Subscriber;
+using System;
+using System.Web.Mvc;
 
 namespace PeriodicalLiterature.Web.Controllers
 {
@@ -25,48 +28,48 @@ namespace PeriodicalLiterature.Web.Controllers
 
             Mapper.Map(subscriber, model);
 
-            return View("PublisherProfile", model);
+            return View("SubscriberProfile", model);
         }
 
         [Authorize(Roles = "Subscriber")]
         public ActionResult EditProfile()
         {
-            var publisherId = new Guid(User.Identity.GetUserId());
+            var subscriberId = new Guid(User.Identity.GetUserId());
 
-            var publisher = _publisherService.GetPublisher(publisherId);
+            var subscriber = _subscriberService.GetSubscriber(subscriberId);
 
-            var model = new PublisherEditViewModel
-            {
-                CountrySelectList = EnumToSelectList<Country>()
-            };
+            var model = new SubscriberEditViewModel();
 
-            Mapper.Map(publisher, model);
+            Mapper.Map(subscriber, model);
 
-            return View("EditPublisherProfile", model);
+            return View("EditSubscriberProfile", model);
         }
 
         [HttpPost]
         [Authorize(Roles = "Subscriber")]
-        public ActionResult EditProfile(PublisherEditViewModel model)
+        public ActionResult EditProfile(SubscriberEditViewModel model)
         {
-            var publisher = new Publisher();
+            var subscriber = new Subscriber()
+            {
+               Id = new Guid(User.Identity.GetUserId())
+            };
 
-            Mapper.Map(model, publisher);
+            Mapper.Map(model, subscriber);
 
-            _publisherService.EditPublisher(publisher);
+            _subscriberService.EditSubscriber(subscriber);
 
             return RedirectToAction("GetProfile");
         }
 
-        public ActionResult GetPublisherDetails(Guid publisherId)
+        public ActionResult GetPublisherDetails(Guid subscriberId)
         {
-            var publisher = _publisherService.GetPublisher(publisherId);
+            var subscriber = _subscriberService.GetSubscriber(subscriberId);
 
-            var model = new PublisherDetailsViewModel();
+            var model = new SubscriberDetailsViewModel();
 
-            Mapper.Map(publisher, model);
+            Mapper.Map(subscriber, model);
 
-            return View("PublisherDetails", model);
+            return View("SubscriberDetails", model);
         }
     }
 }

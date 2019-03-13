@@ -11,6 +11,8 @@ namespace PeriodicalLiterature.Services.MapperConfig
 
             CreateMap<Publisher, Publisher>();
 
+            CreateMap<Subscriber, Subscriber>();
+
             CreateMap<Contract, Contract>();
         }
     }

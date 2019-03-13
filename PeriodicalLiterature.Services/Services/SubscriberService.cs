@@ -1,4 +1,5 @@
 ﻿using System;
+using AutoMapper;
 using PeriodicalLiterature.Contracts.Interfaces.DAL;
 using PeriodicalLiterature.Contracts.Interfaces.Services;
 using PeriodicalLiterature.Models.Entities;
@@ -20,9 +21,28 @@ namespace PeriodicalLiterature.Services.Services
             _unitOfWork.Save();
         }
 
-        public Subscriber GetSubscriber(Guid publisherId)
+        public Subscriber GetSubscriber(Guid subscriberId)
         {
-            var sbscriber = _unitOfWork.GetRepository<Subscriber>().GetSingle(x=>x.)
+            var subscriber = _unitOfWork.GetRepository<Subscriber>()
+                .GetSingle(x => x.Id == subscriberId);
+
+            return subscriber;
+        }
+
+        public void EditSubscriber(Subscriber subscriber)
+        {
+            var subscriberEntity = _unitOfWork.GetRepository<Subscriber>().GetSingle(x => x.Id == subscriber.Id);
+
+            if (subscriberEntity == null)
+            {
+                throw new Exception($"Subscriber with id:{subscriber.Id} doesn't exist");
+            }
+
+            Mapper.Map(subscriber, subscriberEntity);
+
+            _unitOfWork.GetRepository<Subscriber>().Update(subscriberEntity);
+
+            _unitOfWork.Save();
         }
     }
 }

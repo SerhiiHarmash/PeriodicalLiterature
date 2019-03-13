@@ -1,0 +1,46 @@
+﻿@model PeriodicalLiterature.Web.Models.ViewModels.Subscriber.SubscriberProfileViewModel
+
+@{
+    ViewBag.Title = "SubscriberProfileViewModel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="wrapper-content">
+    <ul class="navigation">
+        <li>Menu</li>
+        <li><a href="">My Subscriptions</a></li>
+        <li><a href="">Replenish account</a></li>
+    </ul>
+
+
+    <div class="content">
+        <h3>
+            Profile
+            <span class="edit-profile">
+                @Html.ActionLink("Edit profile", "EditProfile")
+            </span>
+        </h3>
+        <div class="profile-info-wrapper">
+            <div class="profile-info-bl">
+                <div class="profile-info-name"> @Html.DisplayNameFor(model => model.Id)</div>
+                <div class="profile-info-text">@Html.DisplayFor(model => model.Id)</div>
+            </div>
+            <div class="profile-info-bl">
+                <div class="profile-info-name"> @Html.DisplayNameFor(model => model.Name)</div>
+                <div class="profile-info-text">@Html.DisplayFor(model => model.Name)</div>
+            </div>
+            <div class="profile-info-bl">
+                <div class="profile-info-name"> @Html.DisplayNameFor(model => model.SecondName)</div>
+                <div class="profile-info-text">@Html.DisplayFor(model => model.SecondName)</div>
+            </div>
+            <div class="profile-info-bl">
+                <div class="profile-info-name"> @Html.DisplayNameFor(model => model.Account)</div>
+                <div class="profile-info-text">@Html.DisplayFor(model => model.Account)</div>
+            </div>          
+        </div>
+    </div>
+</div>
+
+
+
+

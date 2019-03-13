@@ -223,7 +223,9 @@
     <Compile Include="Models\ViewModels\Publisher\PublisherEditViewModel.cs" />
     <Compile Include="Models\ViewModels\Publisher\PublisherProfileViewModel.cs" />
     <Compile Include="Models\ViewModels\RegisterViewModel.cs" />
-    <Compile Include="Models\ViewModels\Subscriber\PublisherProfileViewModel.cs" />
+    <Compile Include="Models\ViewModels\Subscriber\SubscriberDetailsViewModel.cs" />
+    <Compile Include="Models\ViewModels\Subscriber\SubscriberEditViewModel.cs" />
+    <Compile Include="Models\ViewModels\Subscriber\SubscriberProfileViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -280,6 +282,9 @@
     <Content Include="Views\Edition\CreateEdition.cshtml" />
     <Content Include="Views\Edition\PublisherEditions.cshtml" />
     <Content Include="Views\Edition\EditionDetails.cshtml" />
+    <Content Include="Views\Subscriber\SubscriberProfileViewModel.cshtml" />
+    <Content Include="Views\Subscriber\EditSubscriberProfile.cshtml" />
+    <Content Include="Views\Subscriber\SubscriberDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
