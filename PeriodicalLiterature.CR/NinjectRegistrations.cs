@@ -27,6 +27,7 @@ namespace PeriodicalLiterature.CR
             Bind<IContractResultService>().To<ContractResultService>();
             Bind<IEditionService>().To<EditionService>();          
             Bind<IGenreService>().To<GenreService>();
+            Bind<ICardService>().To<CardService>();
         }
     }
 }

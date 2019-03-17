@@ -13,5 +13,6 @@ namespace PeriodicalLiterature.Models.Entities
 
         public  ICollection<Comment> Comments { get; set; }
 
+        public ICollection<BankTransaction> BankTransactions { get; set; }
     }
 }

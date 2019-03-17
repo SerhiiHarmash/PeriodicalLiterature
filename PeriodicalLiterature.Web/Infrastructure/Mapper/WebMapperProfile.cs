@@ -3,6 +3,7 @@ using AutoMapper;
 using PeriodicalLiterature.Models.Entities;
 using PeriodicalLiterature.Models.Enums;
 using PeriodicalLiterature.Web.Models.ViewModels.Admin;
+using PeriodicalLiterature.Web.Models.ViewModels.Card;
 using PeriodicalLiterature.Web.Models.ViewModels.Contract;
 using PeriodicalLiterature.Web.Models.ViewModels.Edition;
 using PeriodicalLiterature.Web.Models.ViewModels.Publisher;
@@ -76,6 +77,8 @@ namespace PeriodicalLiterature.Web.Infrastructure.Mapper
             CreateMap<SubscriberEditViewModel, Subscriber>();
 
             CreateMap<Subscriber, SubscriberDetailsViewModel>();
+
+            CreateMap<CardViewModel, Card>().ReverseMap();
         }
     }
 }

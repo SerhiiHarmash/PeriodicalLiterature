@@ -48,6 +48,7 @@
     <Compile Include="Interfaces\Services\IContractResultService.cs" />
     <Compile Include="Interfaces\Services\IContractService.cs" />
     <Compile Include="Interfaces\Services\IGenreService.cs" />
+    <Compile Include="Interfaces\Services\ICardService.cs" />
     <Compile Include="Interfaces\Services\IPublisherService.cs" />
     <Compile Include="Interfaces\Services\ISubscriberService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

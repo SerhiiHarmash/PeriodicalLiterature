@@ -11,5 +11,7 @@ namespace PeriodicalLiterature.Models.Entities
         public decimal Account { get; set; }
         
         public  ICollection<Subscription> Subscriptions { get; set; }
+
+        public  ICollection<Card> Cards { get; set; }
     }
 }

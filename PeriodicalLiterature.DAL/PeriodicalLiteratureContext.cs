@@ -35,5 +35,9 @@ namespace PeriodicalLiterature.DAL
         public DbSet<Subscription> Subscriptions { get; set; }
 
         public DbSet<Genre> Genres { get; set; }
+
+        public DbSet<BankTransaction> BankTransactions { get; set; }
+
+        public DbSet<Card> Cards { get; set; }
     }
 }

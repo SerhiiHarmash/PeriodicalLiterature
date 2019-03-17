@@ -2,7 +2,6 @@
 using Microsoft.AspNet.Identity;
 using PeriodicalLiterature.Contracts.Interfaces.Services;
 using PeriodicalLiterature.Models.Entities;
-using PeriodicalLiterature.Web.Models.ViewModels.Publisher;
 using PeriodicalLiterature.Web.Models.ViewModels.Subscriber;
 using System;
 using System.Web.Mvc;
@@ -51,7 +50,7 @@ namespace PeriodicalLiterature.Web.Controllers
         {
             var subscriber = new Subscriber()
             {
-               Id = new Guid(User.Identity.GetUserId())
+                Id = new Guid(User.Identity.GetUserId())
             };
 
             Mapper.Map(model, subscriber);
