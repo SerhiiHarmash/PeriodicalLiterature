@@ -1,0 +1,89 @@
+﻿@model PeriodicalLiterature.Web.Models.ViewModels.Contract.ContractForFollowingViewModel
+@using PeriodicalLiterature.Models.Enums
+
+@{
+    ViewBag.Title = "Contract";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int month = 0;
+    decimal price = 0;
+    int counter = (int)Model.Periodicity;
+}
+
+<br/>
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <a href="~/Storage/@Model.CoverName"><img class="covet-img" src="~/Storage/@Model.CoverName" /></a>
+        <br/>
+        <a class="btn btn-info btn-demo-issue" href="~/Storage/@Model.FileName" target="_blank">View demo issue</a>
+        
+        <a class="ref-all-issues" href="#" target="_blank">View all issues this edition >></a>
+    </div>
+
+    <div class="col-md-8">
+        @using (Html.BeginForm("SubscribeToContract", "Contract", FormMethod.Get))
+        {
+            <input type="hidden" name="contractId" value="@Model.Id">
+            <p class="edition-title">@Model.EditionTitle</p>
+            <p class="edition-periodicity">@Model.Periodicity.ToString()</p>
+
+            <p>Electronic version:</p>
+            for (int i = 0; i <= 360; i += 90)
+            {
+                <div class="radio">
+
+                    @if (counter < (int)Periodicity.Monthly)
+                    {
+                        month = 1;
+                        price = 30 / (int)Model.Periodicity * Model.ReleasePrice;
+                        counter = 90;
+                    }
+                    else
+                    {
+                        counter = i;
+                        month = counter / 30;
+                        price = counter / (int)Model.Periodicity * Model.ReleasePrice;
+                    }
+
+                    <label>
+                        <input class="form-check-input" type="radio" name="month" value="@month" checked>@month month for <span class="text-red">@price $</span>
+                    </label>
+                </div>
+            }
+
+            <input type="submit" class="btn btn-success" value="Subscribe">
+            <br />
+         }
+
+
+
+        <div class="row">
+            <div class="col-md-3 button-margin">
+                <a href="/Contract/SubscribeToContract?contractId=@Model.Id&month=0" class="btn btn-warning">Buy current issue</a>
+            </div>
+            <div class="col-md-3 price-issue">
+                <p class="fat">Price of issue:</p>
+                <p class="cost">@Model.ReleasePrice$</p>
+            </div>
+        </div>
+        <hr />
+        <p>
+            <span class="fat">Publisher: </span>
+            <a href="~/Publisher/GetPublisherDetails?publisherId=@Model.PublisherId">@Model.PublisherName</a>
+        </p>
+        <p><span class="fat">Category: </span> @Model.Category</p>
+        <p><span class="fat">Genres: </span>@Model.Genres</p>
+        <p><span class="fat">Language: </span>@Model.Language</p>
+        <p><span class="fat">Description: </span>@Model.DescriptionEdition</p>
+
+    </div>
+</div>
+<hr/>
+
+<div class="comments">
+    <div class="title">
+        <div class="count-comments">0 Comments</div>
+        <div><button type="button" class="btn btn-warning btn-write-comment">Write a comment</button></div>
+    </div>
+</div>
+

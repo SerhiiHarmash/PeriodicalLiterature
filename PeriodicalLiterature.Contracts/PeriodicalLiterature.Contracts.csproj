@@ -49,8 +49,10 @@
     <Compile Include="Interfaces\Services\IContractService.cs" />
     <Compile Include="Interfaces\Services\IGenreService.cs" />
     <Compile Include="Interfaces\Services\ICardService.cs" />
+    <Compile Include="Interfaces\Services\IPaymentService.cs" />
     <Compile Include="Interfaces\Services\IPublisherService.cs" />
     <Compile Include="Interfaces\Services\ISubscriberService.cs" />
+    <Compile Include="Interfaces\Services\ISubscriptionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\DAL\IRepository.cs" />
   </ItemGroup>

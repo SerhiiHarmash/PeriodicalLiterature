@@ -1,0 +1,22 @@
+﻿@model System.Guid
+@{
+  
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br/>
+<div style="display: flex; justify-content: center;">
+    <form action="/Bank/ConfirmPaySubscriptionByCard" method="post" >
+        <input type="hidden" name="subscriptionId" value="@Model"/>
+
+        <h3>Payment confirm</h3>
+       
+        <div class="form-group" style="margin-top: 16   px;">
+            <label for="code">Enter confirmation code</label>
+            <input name="confirmationCode"  class="form-control" id="code" placeholder="code">      
+        </div>
+        
+        <input type="submit" value="submit" class="btn btn-success"/>
+       
+    </form>
+</div>

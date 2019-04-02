@@ -118,6 +118,18 @@
     <Compile Include="Migrations\201903151307194_createTablesCardAndBankTransaction.Designer.cs">
       <DependentUpon>201903151307194_createTablesCardAndBankTransaction.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903270938490_addDateToBanckTransaction.cs" />
+    <Compile Include="Migrations\201903270938490_addDateToBanckTransaction.Designer.cs">
+      <DependentUpon>201903270938490_addDateToBanckTransaction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904011302535_NewTable.cs" />
+    <Compile Include="Migrations\201904011302535_NewTable.Designer.cs">
+      <DependentUpon>201904011302535_NewTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904020950392_DropLink.cs" />
+    <Compile Include="Migrations\201904020950392_DropLink.Designer.cs">
+      <DependentUpon>201904020950392_DropLink.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PeriodicalLiteratureContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -165,6 +177,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903151307194_createTablesCardAndBankTransaction.resx">
       <DependentUpon>201903151307194_createTablesCardAndBankTransaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903270938490_addDateToBanckTransaction.resx">
+      <DependentUpon>201903270938490_addDateToBanckTransaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904011302535_NewTable.resx">
+      <DependentUpon>201904011302535_NewTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904020950392_DropLink.resx">
+      <DependentUpon>201904020950392_DropLink.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

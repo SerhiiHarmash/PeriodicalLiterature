@@ -1,0 +1,21 @@
+﻿@using System.Diagnostics.Contracts
+@model IEnumerable<PeriodicalLiterature.Web.Models.ViewModels.Contract.ContractsShowcase>
+
+@{
+    ViewBag.Title = "Catalog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Catalog</h2>
+<hr/>
+
+@foreach (var contract in Model)
+{
+    <div class="contract-block">
+        <a href="/Contract/GetContractForFollowing?contractId=@contract.Id">
+            <img src="~/Storage/@contract.CoverName" alt="Cover"/>
+            <p class="contract-name">@contract.EditionTitle</p>
+            <p class="contract-periodicity">@contract.Periodicity</p>
+        </a>
+    </div>
+}

@@ -17,6 +17,7 @@ namespace PeriodicalLiterature.Web.Controllers
             _subscriberService = subscriberService;
         }
 
+        [Authorize(Roles = "Subscriber")]
         public ActionResult GetProfile()
         {
             var subscriberId = new Guid(User.Identity.GetUserId());

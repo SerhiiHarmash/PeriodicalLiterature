@@ -199,6 +199,7 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BankController.cs" />
     <Compile Include="Controllers\CardController.cs" />
     <Compile Include="Controllers\ContractController.cs" />
     <Compile Include="Controllers\EditionController.cs" />
@@ -210,11 +211,17 @@
     </Compile>
     <Compile Include="Infrastructure\Mapper\WebMapperProfile.cs" />
     <Compile Include="Models\ViewModels\Admin\AdminViewModel.cs" />
+    <Compile Include="Models\ViewModels\Bank\DataToSubscription.cs" />
+    <Compile Include="Models\ViewModels\Bank\PaySubscriptionViewModel.cs" />
     <Compile Include="Models\ViewModels\Card\CardViewModel.cs" />
     <Compile Include="Models\ViewModels\Contract\ContractDetailsViewModel.cs" />
     <Compile Include="Models\ViewModels\Contract\ContractEditViewModel.cs" />
     <Compile Include="Models\ViewModels\Contract\ContractForConfirmationViewModel.cs" />
+    <Compile Include="Models\ViewModels\Contract\ContractForFollowingViewModel.cs" />
+    <Compile Include="Models\ViewModels\Contract\ContractPaymentDataViewModel.cs" />
     <Compile Include="Models\ViewModels\Contract\ContractShortDetailsViewModel.cs" />
+    <Compile Include="Models\ViewModels\Contract\ContractsShowcase .cs" />
+    <Compile Include="Models\ViewModels\Contract\ContractSubscribeViewModel.cs" />
     <Compile Include="Models\ViewModels\Contract\PublisherApprovedContractShortViewModel.cs" />
     <Compile Include="Models\ViewModels\Contract\PublisherContractShortViewModel.cs" />
     <Compile Include="Models\ViewModels\Edition\EditionDetailsViewModel.cs" />
@@ -288,6 +295,12 @@
     <Content Include="Views\Subscriber\SubscriberDetails.cshtml" />
     <Content Include="Views\Subscriber\SubscriberProfile.cshtml" />
     <Content Include="Views\Card\AddCard.cshtml" />
+    <Content Include="Views\Contract\Catalog.cshtml" />
+    <Content Include="Views\Contract\Contract.cshtml" />
+    <Content Include="Views\Contract\SubscribeToContract.cshtml" />
+    <Content Include="Views\Contract\Error.cshtml" />
+    <Content Include="Views\Bank\PaySubscriptionByCard.cshtml" />
+    <Content Include="Views\Bank\ConfirmPay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

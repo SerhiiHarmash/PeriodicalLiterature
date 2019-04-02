@@ -28,18 +28,19 @@ namespace PeriodicalLiterature.Models.Entities
 
         public string FileName { get; set; }
 
-        [NotMapped]
-        public DateTime? LastReleaseDate => Editions?.OrderByDescending(x => x.ReleaseDate).FirstOrDefault()?.ReleaseDate;
-
-        [NotMapped]
-        public DateTime? NextReleaseDate => LastReleaseDate?.AddDays((int)Periodicity);
-
         public ICollection<Edition> Editions { get; set; }
 
         public Status Status { get; set; }
 
         public Guid PublisherId { get; set; }
 
-        public Publisher Publisher { get; set; } 
+        public Publisher Publisher { get; set; }
+
+        [NotMapped]
+        public DateTime? LastReleaseDate => Editions?
+            .Where(x => x.ReleaseDate <= DateTime.UtcNow &&
+                        x.ReleaseDate >= DateTime.UtcNow.AddDays(-(int)Periodicity))?.FirstOrDefault()?.ReleaseDate;
+        [NotMapped]
+        public DateTime? NextReleaseDate => LastReleaseDate?.AddDays((int)Periodicity);
     }
 }

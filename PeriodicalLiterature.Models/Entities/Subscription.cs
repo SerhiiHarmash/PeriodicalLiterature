@@ -16,13 +16,15 @@ namespace PeriodicalLiterature.Models.Entities
         [NotMapped]
         public int MagazineIssuesCount => Editions.Count();
 
-        public Guid UserId { get; set; }
+        public Guid SubscriberId { get; set; }
 
-        public Subscriber User { get; set; }
+        public Subscriber Subscriber { get; set; }
 
         public Guid ContractId { get; set; }
 
         public Contract Contract { get; set; }
+
+        public bool IsPayed { get; set; }
 
         [NotMapped]
         public ICollection<Edition> Editions => Contract.Editions

@@ -20,7 +20,9 @@
         <th>
             @Html.DisplayNameFor(model => model.LastReleaseDate)
         </th>
-
+        <th>
+            @Html.DisplayNameFor(model => model.LastAddedDate)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.NextReleaseDate)
         </th>
@@ -42,13 +44,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.LastReleaseDate)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastAddedDate)
+            </td>
 
             <td>
                 @Html.DisplayFor(modelItem => item.NextReleaseDate)
             </td>
 
 
-            @if (item.NextReleaseDate?.AddDays(-2) < DateTime.UtcNow || item.NextReleaseDate == null)
+            @if (item.LastReleaseDate >= item.LastAddedDate || item.NextReleaseDate == null)
             {
                 <td>
                     @Html.ActionLink("Add edition", "AddEdition", "Edition",

@@ -1,0 +1,36 @@
+﻿@model PeriodicalLiterature.Web.Models.ViewModels.Contract.ContractSubscribeViewModel
+
+@{
+    ViewBag.Title = "SubscribeToContract";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.EditionName</h2>
+
+<div>
+    @if (Model.NumberOfIssues == 1)
+    {
+        <p>Buy current issue</p>
+        <p>Number of issues: @Model.NumberOfIssues</p>
+        <p>Total price: @Model.TotalPrice $</p>
+    }
+    else
+    {
+        <h2>Subscribe To Edition</h2>
+        <p>The subscrible will contains of next releases</p>
+        <p>Begin date: @Model.BeginDate</p>
+        <p>End date: @Model.EndDate </p>
+        <p>Number of issues: @Model.NumberOfIssues</p>
+        <p>Total price: @Model.TotalPrice $</p>
+    }
+    <div class="subscribe-container">
+        <a class="btn btn-danger" href="/Contract/GetContractForFollowing?contractId=@Model.ContractId">Cancel</a>
+        <a class="btn btn-success" href="/Bank/PaySubscriptionByCard?subscriptionId=@Model.SubscriptionId">Next</a>
+    </div>
+</div>
+
+
+
+
+
+

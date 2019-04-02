@@ -28,6 +28,8 @@ namespace PeriodicalLiterature.CR
             Bind<IEditionService>().To<EditionService>();          
             Bind<IGenreService>().To<GenreService>();
             Bind<ICardService>().To<CardService>();
+            Bind<ISubscriptionService>().To<SubscriptionService>();
+            Bind<IPaymentService>().To<PaymentService>();
         }
     }
 }

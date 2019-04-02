@@ -11,6 +11,8 @@ namespace PeriodicalLiterature.Web.Models.ViewModels.Contract
 
         public DateTime? NextReleaseDate { get; set; }
 
+        public DateTime? LastAddedDate { get; set; }
+
         public Periodicity Periodicity { get; set; }
     }
 }

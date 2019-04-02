@@ -39,5 +39,7 @@ namespace PeriodicalLiterature.DAL
         public DbSet<BankTransaction> BankTransactions { get; set; }
 
         public DbSet<Card> Cards { get; set; }
+
+        public DbSet<PaymentConfirmationCode> PaymentConfirmationCodes { get; set; }
     }
 }

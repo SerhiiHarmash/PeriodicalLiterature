@@ -51,7 +51,8 @@ namespace PeriodicalLiterature.Services.Services
 
         public IEnumerable<Contract> GetAllContractsByPublisherId(Guid publisherId)
         {
-            var contracts = _unitOfWork.GetRepository<Contract>().GetMany(x => x.PublisherId == publisherId,
+            var contracts = _unitOfWork.GetRepository<Contract>()
+                .GetMany(x => x.PublisherId == publisherId,
                 null, null, null, i=>i.Publisher);
 
             return contracts;
@@ -60,7 +61,8 @@ namespace PeriodicalLiterature.Services.Services
         public IEnumerable<Contract> GetApprovedContractsByPublisherId(Guid publisherId)
         {
             var contracts = _unitOfWork.GetRepository<Contract>()
-                .GetMany(x => x.PublisherId == publisherId && x.Status == Status.Approved, null, null, null, i=>i.Editions);
+                .GetMany(x => x.PublisherId == publisherId && x.Status == Status.Approved,
+                    null, null, null, i=>i.Editions);
 
             return contracts;
         }
@@ -69,7 +71,8 @@ namespace PeriodicalLiterature.Services.Services
         {
             if (filterCriteria == null)
             {
-                var contracts = _unitOfWork.GetRepository<Contract>().GetMany(null,null,null,null,i=>i.Publisher);
+                var contracts = _unitOfWork.GetRepository<Contract>()
+                    .GetMany(null,null,null,null,i=>i.Publisher);
 
                 return contracts;
             }
@@ -80,14 +83,15 @@ namespace PeriodicalLiterature.Services.Services
         public Contract GetContractById(Guid id)
         {
             var contract =_unitOfWork.GetRepository<Contract>()
-                .GetSingle(x => x.Id == id, x=>x.Genres, i=>i.Publisher);
+                .GetSingle(x => x.Id == id, x=>x.Genres, i=>i.Publisher, i=>i.Editions);
 
             return contract;
         }
 
         public void ChangeStatus(Guid contractId, Status newStatus)
         {
-            var contract = _unitOfWork.GetRepository<Contract>().GetSingle(x => x.Id == contractId);
+            var contract = _unitOfWork.GetRepository<Contract>()
+                .GetSingle(x => x.Id == contractId);
 
             if (contract != null)
             {
@@ -97,6 +101,15 @@ namespace PeriodicalLiterature.Services.Services
             _unitOfWork.Save();
         }
 
-      
+        public IEnumerable<Contract> GetApprovedContract()
+        {
+            var contracts = _unitOfWork.GetRepository<Contract>()
+                .GetMany(x => x.Status == Status.Approved);
+
+            return contracts;
+        }
+
+
+
     }
 }

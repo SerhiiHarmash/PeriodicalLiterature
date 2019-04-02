@@ -49,6 +49,8 @@
   <ItemGroup>
     <Compile Include="Entities\BankTransaction.cs" />
     <Compile Include="Entities\Card.cs" />
+    <Compile Include="Entities\PaymentConfirmationCode.cs" />
+    <Compile Include="Entities\SubscriptionCode .cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Enums\BankTransactionType.cs" />
     <Compile Include="Enums\Category.cs" />

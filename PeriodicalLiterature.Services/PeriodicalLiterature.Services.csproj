@@ -55,8 +55,10 @@
     <Compile Include="Services\ContractService.cs" />
     <Compile Include="Services\EditionService.cs" />
     <Compile Include="Services\GenreService.cs" />
+    <Compile Include="Services\PaymentService.cs" />
     <Compile Include="Services\PublisherService.cs" />
     <Compile Include="Services\SubscriberService.cs" />
+    <Compile Include="Services\SubscriptionService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PeriodicalLiterature.Contracts\PeriodicalLiterature.Contracts.csproj">

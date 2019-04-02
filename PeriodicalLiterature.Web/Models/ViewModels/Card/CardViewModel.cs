@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace PeriodicalLiterature.Web.Models.ViewModels.Card
 {
     public class CardViewModel
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
 
-        [Required(ErrorMessage = "Please, enter card holder’s name" )]
-        [Display( Name= "Card holder’s name")]
+        [Required(ErrorMessage = "Please, enter card holder’s name")]
+        [Display(Name = "Card holder’s name")]
         [RegularExpression(@"^((?:[A-Za-z]+ ?){1,3})$", ErrorMessage = "Please, enter card holder’s name")]
         public string CardHolderName { get; set; }
 

@@ -32,9 +32,6 @@ textarea {
     text-align: center;
 }
 
-.navigation {
-    /*width: 300px;*/
-}
 
 .navigation {
     margin-top: 40px;
@@ -46,9 +43,9 @@ textarea {
     box-shadow: 0 0 5px #cccccc;
 }
 
-.navigation li:first-child {
-    font-weight: bold;
-}
+    .navigation li:first-child {
+        font-weight: bold;
+    }
 
 .confirmation-message {
     border: 2px solid red;
@@ -65,10 +62,11 @@ textarea {
     font-size: 16px;
 }
 
-.navigation  li a:hover {
+.navigation li a:hover {
     cursor: pointer;
     color: red;
 }
+
 .form-group-text textarea {
     max-width: 100%;
     width: 100%;
@@ -102,3 +100,106 @@ textarea {
         flex-wrap: wrap;
     }
 }
+
+.contract-block {
+    width: 200px;
+    height: 325px;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 20px;
+    overflow: hidden;
+    margin-right: 20px;
+    box-shadow: 1px 1px 5px rgba(122,122,122,0.5);
+}
+
+    .contract-block a img {
+        width: 100%;
+    }
+
+    .contract-block a p {
+        margin: 5px 0 0 10px;
+    }
+
+    .contract-block .contract-name {
+        color: black;
+    }
+
+    .contract-block .contract-periodicity {
+        color: #777;
+    }
+
+    .contract-block a:hover {
+        text-decoration: none;
+    }
+
+.edition-title {
+    color: #ef2b31;
+    font-size: 35px;
+}
+
+.edition-periodicity {
+    color: #777777;
+    font-size: 18px;
+}
+
+.text-red {
+    color: #ef2b31;
+}
+
+.fat {
+    font-weight: bold;
+}
+
+.button-margin {
+    margin-top: 10px;
+}
+
+.price-issue p {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.price-issue .cost {
+    font-size: 20px;
+    color: #ef2b31;
+}
+
+.btn-demo-issue {
+    margin: 30px 0 0 0;
+
+}
+.ref-all-issues {
+    display: block;
+    margin: 20px 0 0 0;
+
+    color: #ef2b31;
+    font-size: 16px;
+
+
+}
+
+.ref-all-issues:hover {
+    color: #ef2b31;
+}
+
+.covet-img {
+    width: 100%;
+}
+
+.comments .title {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.count-comments {
+    /*float: left;*/
+    color: #777777;
+    font-size: 24px;
+}
+
+.subscribe-container{
+    display: flex;
+}
+

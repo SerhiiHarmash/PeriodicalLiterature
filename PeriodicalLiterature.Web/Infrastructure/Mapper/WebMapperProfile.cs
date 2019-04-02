@@ -37,7 +37,7 @@ namespace PeriodicalLiterature.Web.Infrastructure.Mapper
             CreateMap<Contract, ContractShortDetailsViewModel>()
                 .ForMember(model=>model.PublisherName,
                     opt=>opt
-                        .MapFrom(contract=>contract.Publisher.Name)); 
+                        .MapFrom(contract=>contract.Publisher.Name));
 
             CreateMap<ContractForConfirmationViewModel, ContractResult>()
                 .ForMember(
@@ -59,13 +59,17 @@ namespace PeriodicalLiterature.Web.Infrastructure.Mapper
 
             CreateMap<Edition, EditionDetailsViewModel>()
                 .ForMember(model => model.Genres,
-                    opt => opt.MapFrom(edition => edition.Contract.Genres.Select(genre => genre.Name)))
+                    opt => opt
+                        .MapFrom(edition => edition.Contract.Genres.Select(genre => genre.Name)))
                 .ForMember(model=>model.Periodicity,
-                    opt=> opt.MapFrom(edition=>edition.Contract.Periodicity.ToString()))
+                    opt=> opt
+                        .MapFrom(edition=>edition.Contract.Periodicity.ToString()))
                 .ForMember(model => model.Language,
-                    opt => opt.MapFrom(edition => edition.Contract.Language.ToString()))
+                    opt => opt
+                        .MapFrom(edition => edition.Contract.Language.ToString()))
                 .ForMember(model => model.Category,
-                    opt => opt.MapFrom(edition => edition.Contract.Category.ToString()));
+                    opt => opt
+                        .MapFrom(edition => edition.Contract.Category.ToString()));
 
 
             CreateMap<Edition, EditionShortDetailsViewModel>()
@@ -79,6 +83,20 @@ namespace PeriodicalLiterature.Web.Infrastructure.Mapper
             CreateMap<Subscriber, SubscriberDetailsViewModel>();
 
             CreateMap<CardViewModel, Card>().ReverseMap();
+
+            CreateMap<Contract, ContractsShowcase>()
+                .ForMember(model => model.Periodicity, opt => opt
+                    .MapFrom(contract => contract.Periodicity.ToString()));
+
+            CreateMap<Contract, ContractForFollowingViewModel>()
+                .ForMember(model => model.Language, opt => opt
+                    .MapFrom(contract => contract.Language.ToString()))
+                .ForMember(model => model.Category, opt => opt
+                    .MapFrom(contract => contract.Category.ToString()))
+                .ForMember(model => model.Genres, opt => opt
+                    .MapFrom(contract => contract.Genres.Select(genre => genre.Name)))
+                .ForMember(model => model.Category, opt => opt
+                    .MapFrom(contract => contract.Category.ToString()));
         }
     }
 }

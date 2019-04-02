@@ -18,18 +18,27 @@ namespace PeriodicalLiterature.Web.Controllers
         private readonly IContractService _contractService;
         private readonly IContractResultService _contractResultService;
         private readonly IEditionService _editionService;
-
+        private readonly ICardService _cardService;
+        private readonly ISubscriptionService _subscriptionService;
+        private readonly IPaymentService _paymentService;
 
         public ContractController(
             IGenreService genreService,
             IContractService contractService,
             IContractResultService contractResultService,
-            IEditionService editionService)
+            IEditionService editionService,
+            ICardService cardService,
+            ISubscriptionService subscriptionService,
+            IPaymentService paymentService
+           )
         {
             _genreService = genreService;
             _contractService = contractService;
             _contractResultService = contractResultService;
             _editionService = editionService;
+            _cardService = cardService;
+            _subscriptionService = subscriptionService;
+            _paymentService = paymentService;
         }
 
         [Authorize(Roles = "Admin")]
@@ -54,7 +63,6 @@ namespace PeriodicalLiterature.Web.Controllers
         {
             var contract = _contractService.GetContractById(contractId);
 
-
             var model = new ContractDetailsViewModel();
 
             Mapper.Map(contract, model);
@@ -67,6 +75,39 @@ namespace PeriodicalLiterature.Web.Controllers
             }
 
             return View("ContractDetails", model);
+        }
+
+        [Authorize(Roles = "Subscriber")]
+        public ActionResult SubscribeToContract(Guid contractId, int month)
+        {
+            var subscriberId = new Guid(User.Identity.GetUserId());
+            var model = ConfigureContractSubscribeViewModel(contractId, month, subscriberId);
+
+            var isExist =_subscriptionService.CheckIfSubscriptionExists(subscriberId, contractId, model.BeginDate, model.EndDate);
+
+            if (isExist)
+            {
+                return View("Error");
+            }
+
+            var subscription = GetConfiguredSubscription(contractId, month, subscriberId);
+
+            model.SubscriptionId = subscription.Id;
+
+            _subscriptionService.AddSubscription(subscription);
+
+            return View("SubscribeToContract", model);
+        }
+
+        public ActionResult GetContractForFollowing(Guid contractId)
+        {
+            var contract = _contractService.GetContractById(contractId);
+
+            var model = new ContractForFollowingViewModel();
+
+            Mapper.Map(contract, model);
+
+            return View("Contract", model);
         }
 
         [Authorize(Roles = "Admin")]
@@ -86,7 +127,17 @@ namespace PeriodicalLiterature.Web.Controllers
             return RedirectToAction("GetAllContracts");
         }
 
+        
+        public ActionResult GetContractsForFollowing()
+        {
+            var contracts = _contractService.GetApprovedContract();
 
+            var model = new List<ContractsShowcase>();
+
+            Mapper.Map(contracts, model);
+
+            return View("Catalog", model);
+        }
 
         [Authorize(Roles = "Admin")]
         public ActionResult GetAllContracts()
@@ -159,11 +210,23 @@ namespace PeriodicalLiterature.Web.Controllers
 
         public ActionResult GetApprovedContractsByPublisherId(Guid publisherId)
         {
-            var contracts = _contractService.GetApprovedContractsByPublisherId(publisherId);
+            var contracts = _contractService.GetApprovedContractsByPublisherId(publisherId).ToList();
 
             var model = new List<PublisherApprovedContractShortViewModel>();
 
             Mapper.Map(contracts, model);
+
+            //model.ForEach(el=>el.LastAddedDate = 
+            //    contracts?.First(x => x.Id == el.Id)?.Editions?.Count!=0?
+            //        contracts.First(x => x.Id == el.Id).Editions?.Max(e => e.AddingDate)
+            //        :null);
+
+            foreach (var el in model)
+            {
+                var editions = contracts.First(x => x.Id == el.Id).Editions;
+                var lastAddedDate = editions?.Count!=0?editions?.Max(e=>e.AddingDate):null;  
+                el.LastAddedDate = lastAddedDate;
+            }
 
             return View("ApprovedContractsForPublisher", model);
         }
@@ -248,7 +311,7 @@ namespace PeriodicalLiterature.Web.Controllers
             model.GenreMultiSelectList = new MultiSelectList(genres);
             model.CategorySelectList = EnumToSelectList<Category>();
             model.LanguageSelectList = EnumToSelectList<Language>();
-            model.PeriodicitySelectList = EnumToSelectList<Periodicity>();         
+            model.PeriodicitySelectList = EnumToSelectList<Periodicity>();
         }
 
         private SelectList EnumToSelectList<T>() where T : struct
@@ -266,5 +329,62 @@ namespace PeriodicalLiterature.Web.Controllers
             return selectList;
         }
 
+        private ContractSubscribeViewModel ConfigureContractSubscribeViewModel(
+            Guid contractId,
+            int month, 
+            Guid subscriberId)
+        {           
+            const int DayInMonth = 30;
+            var contract = _contractService.GetContractById(contractId);
+            
+            var model = new ContractSubscribeViewModel();
+
+            if (month == 0)
+            {
+                model.NumberOfIssues = 1;
+                model.TotalPrice = contract.ReleasePrice;
+                model.BeginDate = (DateTime)contract.LastReleaseDate;
+                model.EndDate = (DateTime)contract.NextReleaseDate?.AddDays(-1);
+            }
+            else
+            {
+                model.NumberOfIssues = month * DayInMonth / (int)contract.Periodicity;
+                model.TotalPrice = model.NumberOfIssues * contract.ReleasePrice;              
+                model.BeginDate = (DateTime)contract.NextReleaseDate;
+                model.EndDate = model.BeginDate.AddMonths(month);
+            }
+
+            model.EditionName = contract.EditionTitle;
+            model.ContractId = contract.Id;
+ 
+            return model;
+        }
+
+        private Subscription GetConfiguredSubscription(Guid contractId, int month, Guid subscriberId)
+        {
+            const int DayInMonth = 30;
+            var contract = _contractService.GetContractById(contractId);
+
+            var subscription = new Subscription();
+
+            if (month == 0)
+            {
+                subscription.StartDate = (DateTime)contract.LastReleaseDate;
+                subscription.EndDate = (DateTime)contract.NextReleaseDate?.AddDays(-1);
+                subscription.Price = contract.ReleasePrice;
+            }
+            else
+            {
+                subscription.StartDate = (DateTime)contract.NextReleaseDate;
+                subscription.EndDate = subscription.StartDate.AddMonths(month);
+                subscription.Price = month * DayInMonth / (int) contract.Periodicity * contract.ReleasePrice;
+            }
+            subscription.Id = Guid.NewGuid();
+            subscription.ContractId = contract.Id;
+            subscription.IsPayed = false;
+            subscription.SubscriberId = subscriberId;
+
+            return subscription;
+        }
     }
 }

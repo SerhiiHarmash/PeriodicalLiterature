@@ -1,0 +1,81 @@
+﻿@model PeriodicalLiterature.Web.Models.ViewModels.Bank.PaySubscriptionViewModel
+
+@{
+    ViewBag.Title = "PaySubscriptionByCard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>PaySubscriptionByCard</h2>
+
+
+
+@using (Html.BeginForm("PaySubscriptionByCard", "Bank", FormMethod.Post))
+{
+    <input type="hidden" name="SubscriptionId" value="@Model.SubscriptionId">
+    @Html.AntiForgeryToken()
+
+    if (Model.Cards.Count() != 0)
+    {
+
+        @Html.Label("Select card", htmlAttributes: new {@class = "control-label col-md-2"})
+
+        @Html.DropDownListFor(model => model.CardId,
+            Model.Cards,
+            new {@class = "chosen-select form-control"})
+        @Html.ValidationMessageFor(model => model.SelectedCard, "", new {@class = "text-danger"})
+
+    }
+
+    <div class="form-horizontal">
+        <hr/>
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+        <div class="form-group">
+            @Html.LabelFor(model => model.SelectedCard.CardHolderName, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SelectedCard.CardHolderName, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.SelectedCard.CardHolderName, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SelectedCard.CardNumber, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SelectedCard.CardNumber, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.SelectedCard.CardNumber, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SelectedCard.DateOfExpiry, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SelectedCard.DateOfExpiry, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.SelectedCard.DateOfExpiry, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SelectedCard.CVV, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SelectedCard.CVV, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.SelectedCard.CVV, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <p class="col-md-offset-2 col-md-10">Sum: @Model.Sum$</p>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Pay" class="btn btn-success"/>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@section scripts
+{
+    <script>
+        $(".chosen-select").chosen({ allow_single_deselect: true });
+    </script>
+}
+
