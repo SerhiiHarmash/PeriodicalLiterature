@@ -1,0 +1,27 @@
+﻿@model PeriodicalLiterature.Web.Models.ViewModels.Subscription.ContractSubscribeEditions
+
+@{
+    ViewBag.Title = "MyEditions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.EditionTitle</h2>
+<h4>Next release date: @Model.NextReleaseDate</h4>
+<h3> My Editions</h3>
+
+@if (Model.Editions != null)
+{
+    foreach (var edition in Model.Editions)
+    {
+        <div class="contract-block">
+            <a href="/Subscription/GetEditionsSubbscription?contractId=@edition.Id">
+                <img src="~/Storage/@edition.CoverName" alt="Cover" />
+                <p class="contract-name">#@edition.Number</p>
+                <p class="contract-periodicity">release: @edition.ReleaseDate</p>
+            </a>
+        </div>
+    }
+}
+
+
+

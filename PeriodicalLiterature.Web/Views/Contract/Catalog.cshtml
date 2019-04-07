@@ -7,13 +7,118 @@
 }
 
 <h2>Catalog</h2>
-<hr/>
+<hr />
+
+
+
+<div class="filtration">
+    @using (@Html.BeginForm("GetContractsForFollowing", "Contract", FormMethod.Get,
+        new { id = "filterForm" }))
+    {
+
+        <div class="filtration-control">
+            <p class="filtration-title">Filtration</p>
+           
+
+            @Html.LabelFor(model => model.GameFilterCriteria.ItemsPerPage, htmlAttributes: new { @class = "filtration-label" })
+            @Html.DropDownListFor(model => model.GameFilterCriteria.ItemsPerPage, Model.ItemsPerPageVariants, htmlAttributes: new { @class = "chzn-select form-control", style = "margin-left: 2%" })
+
+            <div>
+                @Html.LabelFor(model => model.GameFilterCriteria.GameName, htmlAttributes: new { @class = "filtration-label" })
+                @Html.EditorFor(model => model.GameFilterCriteria.GameName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.GameFilterCriteria.GameName, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(model => model.GameFilterCriteria.Genres, htmlAttributes: new { @class = "filtration-label" })
+            @Html.ListBoxFor(model => model.GameFilterCriteria.Genres, new MultiSelectList(Model.Genres), new { @class = "chzn-select form-control", style = "margin-left: 2%" })
+
+            @Html.LabelFor(model => model.GameFilterCriteria.PlatformTypes, htmlAttributes: new { @class = "filtration-label" })
+            @Html.ListBoxFor(model => model.GameFilterCriteria.PlatformTypes, new MultiSelectList(Model.PlatformTypes), new { @class = "chzn-select form-control " })
+
+            @Html.LabelFor(model => model.GameFilterCriteria.Publishers, htmlAttributes: new { @class = "filtration-label" })
+            @Html.ListBoxFor(model => model.GameFilterCriteria.Publishers, new MultiSelectList(Model.Publishers), new { @class = "chzn-select form-control " })
+
+
+
+            @Html.LabelFor(model => model.GameFilterCriteria.GamePublished, htmlAttributes: new { @class = "filtration-label" })
+            <div class="filtration-checkbox">
+                @Html.RadioButtonFor(model => model.GameFilterCriteria.GamePublished, GamePublished.LastMonth)
+                @Html.Label("last week")
+                <br />
+
+
+                @Html.RadioButtonFor(model => model.GameFilterCriteria.GamePublished, GamePublished.LastMonth)
+                @Html.Label("last month")
+                <br />
+
+                @Html.RadioButtonFor(model => model.GameFilterCriteria.GamePublished, GamePublished.LastYear)
+                @Html.Label("last year")
+                <br />
+
+                @Html.RadioButtonFor(model => model.GameFilterCriteria.GamePublished, GamePublished.TwoYears)
+                @Html.Label("2 years")
+                <br />
+
+                @Html.RadioButtonFor(model => model.GameFilterCriteria.GamePublished, GamePublished.ThreeYears)
+                @Html.Label("3 years")
+                <br />
+            </div>
+
+
+
+            @Html.LabelFor(model => model.GameFilterCriteria.MinPrice, new { @class = "filtration-label" })
+            @Html.EditorFor(model => model.GameFilterCriteria.MinPrice,
+                     new { htmlAttributes = new { @class = "form-control", type = "number", @min = "1", @max = int.MaxValue.ToString(), @step = "1" } })
+
+            @Html.LabelFor(model => model.GameFilterCriteria.MaxPrice, new { @class = "filtration-label" })
+            @Html.EditorFor(model => model.GameFilterCriteria.MaxPrice,
+                     new { htmlAttributes = new { @class = "form-control", type = "number", @min = "1", @max = int.MaxValue.ToString(), @step = "1" } })
+
+            @Html.LabelFor(model => model.GameFilterCriteria.GamePublished, htmlAttributes: new { @class = "filtration-label" })
+            <div class="filtration-checkbox">
+                @Html.RadioButtonFor(model => model.GameFilterCriteria.SortCriterion, SortFilter.Popular)
+                @Html.Label("popular")
+                <br />
+
+                @Html.RadioButtonFor(model => model.GameFilterCriteria.SortCriterion, SortFilter.New)
+                @Html.Label("new")
+                <br />
+
+                @Html.RadioButtonFor(model => model.GameFilterCriteria.SortCriterion, SortFilter.Commented)
+                @Html.Label("most commented")
+                <br />
+
+                @Html.RadioButtonFor(model => model.GameFilterCriteria.SortCriterion, SortFilter.PriceAscending)
+                @Html.Label("price ascending")
+                <br />
+
+                @Html.RadioButtonFor(model => model.GameFilterCriteria.SortCriterion, SortFilter.PriceDescending)
+                @Html.Label("price descending")
+                <br />
+
+            </div>
+
+            <br />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Apply" onclick="OpenPage('0')" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+
+
+
+
+
+</div>
 
 @foreach (var contract in Model)
 {
     <div class="contract-block">
         <a href="/Contract/GetContractForFollowing?contractId=@contract.Id">
-            <img src="~/Storage/@contract.CoverName" alt="Cover"/>
+            <img src="~/Storage/@contract.CoverName" alt="Cover" />
             <p class="contract-name">@contract.EditionTitle</p>
             <p class="contract-periodicity">@contract.Periodicity</p>
         </a>

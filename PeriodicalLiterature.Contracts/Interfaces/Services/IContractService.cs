@@ -20,8 +20,10 @@ namespace PeriodicalLiterature.Contracts.Interfaces.Services
 
         void ChangeStatus(Guid contractId, Status newStatus);
 
-        IEnumerable<Contract> GetAllContracts(ContractFilterCriteria filterCriteria = null);
+        IEnumerable<Contract> GetAllContracts();
 
         IEnumerable<Contract> GetApprovedContract();
+
+        IEnumerable<Contract> GetApprovedContractWithEditions(ContractFilterCriteria contractFilterCriteria);
     }
 }

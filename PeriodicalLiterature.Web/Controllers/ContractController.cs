@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity;
 using PeriodicalLiterature.Contracts.Interfaces.Services;
 using PeriodicalLiterature.Models.Entities;
 using PeriodicalLiterature.Models.Enums;
+using PeriodicalLiterature.Models.Filters;
 using PeriodicalLiterature.Web.Models.ViewModels.Contract;
 using System;
 using System.Collections.Generic;
@@ -110,6 +111,18 @@ namespace PeriodicalLiterature.Web.Controllers
             return View("Contract", model);
         }
 
+
+        public ActionResult GetContractsForFollowing(ContractFilterCriteria contractFilterCriteria)
+        {
+            var contracts = _contractService.GetApprovedContractWithEditions(contractFilterCriteria);
+
+            var model = new List<ContractsShowcase>();
+
+            Mapper.Map(contracts, model);
+
+            return View("Catalog", model);
+        }
+
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult MakeConfirmation(ContractForConfirmationViewModel model)
@@ -127,17 +140,6 @@ namespace PeriodicalLiterature.Web.Controllers
             return RedirectToAction("GetAllContracts");
         }
 
-        
-        public ActionResult GetContractsForFollowing()
-        {
-            var contracts = _contractService.GetApprovedContract();
-
-            var model = new List<ContractsShowcase>();
-
-            Mapper.Map(contracts, model);
-
-            return View("Catalog", model);
-        }
 
         [Authorize(Roles = "Admin")]
         public ActionResult GetAllContracts()

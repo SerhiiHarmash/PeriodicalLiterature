@@ -16,6 +16,6 @@ namespace PeriodicalLiterature.Web.Models.ViewModels.Subscriber
 
         public decimal Account { get; set; }
 
-        public ICollection<Subscription> Subscriptions { get; set; }
+        //public ICollection<Subscription> Subscriptions { get; set; }
     }
 }

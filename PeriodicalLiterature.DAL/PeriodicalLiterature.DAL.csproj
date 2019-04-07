@@ -130,6 +130,10 @@
     <Compile Include="Migrations\201904020950392_DropLink.Designer.cs">
       <DependentUpon>201904020950392_DropLink.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904071135177_migrationForFiltration.cs" />
+    <Compile Include="Migrations\201904071135177_migrationForFiltration.Designer.cs">
+      <DependentUpon>201904071135177_migrationForFiltration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PeriodicalLiteratureContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -186,6 +190,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904020950392_DropLink.resx">
       <DependentUpon>201904020950392_DropLink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904071135177_migrationForFiltration.resx">
+      <DependentUpon>201904071135177_migrationForFiltration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

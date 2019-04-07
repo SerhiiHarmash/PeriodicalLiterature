@@ -34,7 +34,13 @@ namespace PeriodicalLiterature.Models.Entities
 
         public Guid PublisherId { get; set; }
 
+        public decimal Rating { get; set; }
+
         public Publisher Publisher { get; set; }
+
+        public ICollection<Subscription> Subscriptions { get; set; }
+
+        public ICollection<Comment> Comments { get; set; }
 
         [NotMapped]
         public DateTime? LastReleaseDate => Editions?

@@ -1,0 +1,19 @@
+﻿@model IEnumerable<PeriodicalLiterature.Web.Models.ViewModels.Contract.ContractsShowcase>
+@{
+    ViewBag.Title = "Subscriptions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>My Subscriptions</h2>
+<hr />
+
+@foreach (var subscription in Model)
+{
+    <div class="contract-block">
+        <a href="/Subscription/GetEditionsSubbscription?contractId=@subscription.Id">
+            <img src="~/Storage/@subscription.CoverName" alt="Cover" />
+            <p class="contract-name">@subscription.EditionTitle</p>
+            <p class="contract-periodicity">@subscription.Periodicity</p>
+        </a>
+    </div>
+}

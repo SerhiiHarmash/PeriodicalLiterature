@@ -206,6 +206,7 @@
     <Compile Include="Controllers\PublisherController.cs" />
     <Compile Include="Controllers\StartPageController.cs" />
     <Compile Include="Controllers\SubscriberController.cs" />
+    <Compile Include="Controllers\SubscriptionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -235,6 +236,7 @@
     <Compile Include="Models\ViewModels\Subscriber\SubscriberDetailsViewModel.cs" />
     <Compile Include="Models\ViewModels\Subscriber\SubscriberEditViewModel.cs" />
     <Compile Include="Models\ViewModels\Subscriber\SubscriberProfileViewModel.cs" />
+    <Compile Include="Models\ViewModels\Subscription\ContractSubscribeEditions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -301,6 +303,8 @@
     <Content Include="Views\Contract\Error.cshtml" />
     <Content Include="Views\Bank\PaySubscriptionByCard.cshtml" />
     <Content Include="Views\Bank\ConfirmPay.cshtml" />
+    <Content Include="Views\Subscription\MySubscriptions.cshtml" />
+    <Content Include="Views\Subscription\MyEditions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

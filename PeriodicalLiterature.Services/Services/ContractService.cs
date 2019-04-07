@@ -1,12 +1,14 @@
-﻿using PeriodicalLiterature.Contracts.Interfaces.DAL;
+﻿using AutoMapper;
+using PeriodicalLiterature.Contracts.Interfaces.DAL;
 using PeriodicalLiterature.Contracts.Interfaces.Services;
 using PeriodicalLiterature.Models.Entities;
+using PeriodicalLiterature.Models.Enums;
 using PeriodicalLiterature.Models.Filters;
+using PeriodicalLiterature.Services.Filtration;
+using PeriodicalLiterature.Services.Sorters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoMapper;
-using PeriodicalLiterature.Models.Enums;
 
 namespace PeriodicalLiterature.Services.Services
 {
@@ -35,7 +37,7 @@ namespace PeriodicalLiterature.Services.Services
         public void EditContract(Contract contract, ICollection<string> genres)
         {
             var contractEntity = _unitOfWork.GetRepository<Contract>()
-                .GetSingle(x => x.Id == contract.Id,i=>i.Genres);
+                .GetSingle(x => x.Id == contract.Id, i => i.Genres);
 
             Mapper.Map(contract, contractEntity);
 
@@ -47,13 +49,11 @@ namespace PeriodicalLiterature.Services.Services
             _unitOfWork.Save();
         }
 
-        
-
         public IEnumerable<Contract> GetAllContractsByPublisherId(Guid publisherId)
         {
             var contracts = _unitOfWork.GetRepository<Contract>()
                 .GetMany(x => x.PublisherId == publisherId,
-                null, null, null, i=>i.Publisher);
+                null, null, null, i => i.Publisher);
 
             return contracts;
         }
@@ -62,28 +62,23 @@ namespace PeriodicalLiterature.Services.Services
         {
             var contracts = _unitOfWork.GetRepository<Contract>()
                 .GetMany(x => x.PublisherId == publisherId && x.Status == Status.Approved,
-                    null, null, null, i=>i.Editions);
+                    null, null, null, i => i.Editions);
 
             return contracts;
         }
 
-        public IEnumerable<Contract> GetAllContracts(ContractFilterCriteria filterCriteria = null)
+        public IEnumerable<Contract> GetAllContracts()
         {
-            if (filterCriteria == null)
-            {
-                var contracts = _unitOfWork.GetRepository<Contract>()
-                    .GetMany(null,null,null,null,i=>i.Publisher);
+            var contracts = _unitOfWork.GetRepository<Contract>()
+                .GetMany(null, null, null, null, i => i.Publisher);
 
-                return contracts;
-            }
-
-            return null;
+            return contracts;
         }
 
         public Contract GetContractById(Guid id)
         {
-            var contract =_unitOfWork.GetRepository<Contract>()
-                .GetSingle(x => x.Id == id, x=>x.Genres, i=>i.Publisher, i=>i.Editions);
+            var contract = _unitOfWork.GetRepository<Contract>()
+                .GetSingle(x => x.Id == id, x => x.Genres, i => i.Publisher, i => i.Editions);
 
             return contract;
         }
@@ -109,7 +104,21 @@ namespace PeriodicalLiterature.Services.Services
             return contracts;
         }
 
+        public IEnumerable<Contract> GetApprovedContractWithEditions(ContractFilterCriteria contractFilterCriteria)
+        {
+            var sorting = new ContractSortingResolver().CreateSorting(contractFilterCriteria);
+            var predicate = new ContractsFilter().ComposeFilter(contractFilterCriteria);
 
+            var contracts = _unitOfWork.GetRepository<Contract>()
+                .GetMany(predicate, sorting, null, null, i => i.Editions, i => i.Publisher, i => i.Genres);
+
+            if (contracts != null)
+            {
+                contracts = contracts.Where(x => x.Editions.Count > 0);
+            }
+
+            return contracts;
+        }
 
     }
 }

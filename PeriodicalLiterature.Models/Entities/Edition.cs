@@ -1,6 +1,4 @@
-﻿using PeriodicalLiterature.Models.Enums;
-using System;
-using System.Collections.Generic;
+﻿using System;
 
 namespace PeriodicalLiterature.Models.Entities
 {
@@ -24,10 +22,6 @@ namespace PeriodicalLiterature.Models.Entities
 
         public string FileName { get; set; }
 
-        public double Rating { get; set; }
-
         public int Readership { get; set; }
-
-        public ICollection<Comment> Comments { get; set; }
     }
 }
