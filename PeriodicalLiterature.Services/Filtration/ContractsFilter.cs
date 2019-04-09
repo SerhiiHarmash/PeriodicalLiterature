@@ -30,7 +30,7 @@ namespace PeriodicalLiterature.Services.Filtration
 
             if (gameFilterCriteria.Periodicities != null && gameFilterCriteria.Periodicities.Count != 0)
             {
-                expression = new PublishersFilter().AddFilter(gameFilterCriteria, expression);
+                expression = new PeriodicityFilter().AddFilter(gameFilterCriteria, expression);
             }
 
             return expression;

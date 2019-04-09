@@ -21,6 +21,7 @@ namespace PeriodicalLiterature.Models.Filters
 
         //public int? Skip { get; set; }
 
+        [Display(Name = "Sort by")]
         public SortCriteria? SortCriterion { get; set; }
     }
 }

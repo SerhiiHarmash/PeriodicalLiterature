@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using AutoMapper;
 using PeriodicalLiterature.Contracts.Interfaces.DAL;
 using PeriodicalLiterature.Contracts.Interfaces.Services;
@@ -43,6 +44,13 @@ namespace PeriodicalLiterature.Services.Services
             _unitOfWork.GetRepository<Publisher>().Update(publisherEntity);
 
             _unitOfWork.Save();
+        }
+
+        public IEnumerable<Publisher> GetAllPublishers()
+        {
+            var publishers = _unitOfWork.GetRepository<Publisher>().GetMany();
+
+            return publishers;
         }
     }
 }

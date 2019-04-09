@@ -215,6 +215,7 @@
     <Compile Include="Models\ViewModels\Bank\DataToSubscription.cs" />
     <Compile Include="Models\ViewModels\Bank\PaySubscriptionViewModel.cs" />
     <Compile Include="Models\ViewModels\Card\CardViewModel.cs" />
+    <Compile Include="Models\ViewModels\Contract\CatalogViewModel.cs" />
     <Compile Include="Models\ViewModels\Contract\ContractDetailsViewModel.cs" />
     <Compile Include="Models\ViewModels\Contract\ContractEditViewModel.cs" />
     <Compile Include="Models\ViewModels\Contract\ContractForConfirmationViewModel.cs" />

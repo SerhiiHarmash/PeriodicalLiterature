@@ -102,5 +102,11 @@ namespace PeriodicalLiterature.Web.Controllers
             return View("EditionDetails", model);
         }
 
+        public ActionResult GetEditionById(Guid editionId)
+        {
+            var edition = _editionService.GetEditionById(editionId);
+            return View();
+        }
+
     }
 }

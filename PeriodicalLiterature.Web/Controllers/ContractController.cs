@@ -22,6 +22,7 @@ namespace PeriodicalLiterature.Web.Controllers
         private readonly ICardService _cardService;
         private readonly ISubscriptionService _subscriptionService;
         private readonly IPaymentService _paymentService;
+        private readonly IPublisherService _publisherService;
 
         public ContractController(
             IGenreService genreService,
@@ -30,7 +31,8 @@ namespace PeriodicalLiterature.Web.Controllers
             IEditionService editionService,
             ICardService cardService,
             ISubscriptionService subscriptionService,
-            IPaymentService paymentService
+            IPaymentService paymentService,
+            IPublisherService publisherService
            )
         {
             _genreService = genreService;
@@ -40,6 +42,7 @@ namespace PeriodicalLiterature.Web.Controllers
             _cardService = cardService;
             _subscriptionService = subscriptionService;
             _paymentService = paymentService;
+            _publisherService = publisherService;
         }
 
         [Authorize(Roles = "Admin")]
@@ -111,14 +114,27 @@ namespace PeriodicalLiterature.Web.Controllers
             return View("Contract", model);
         }
 
-
         public ActionResult GetContractsForFollowing(ContractFilterCriteria contractFilterCriteria)
         {
+            IgnoreIfNameIsWhiteSpace(contractFilterCriteria);
+
+            contractFilterCriteria.SortCriterion =
+                contractFilterCriteria.SortCriterion==null?
+                    SortCriteria.Rating : contractFilterCriteria.SortCriterion;
+
             var contracts = _contractService.GetApprovedContractWithEditions(contractFilterCriteria);
 
-            var model = new List<ContractsShowcase>();
+            var contractsShowcaseModel = new List<ContractsShowcase>();
 
-            Mapper.Map(contracts, model);
+            Mapper.Map(contracts, contractsShowcaseModel);
+
+            var model = new CatalogViewModel
+            {
+                ContractsShowcase = contractsShowcaseModel,
+                Genres = _genreService.GetAllGenres().Select(x => x.Name).ToList(),
+                Publishers = _publisherService.GetAllPublishers().Select(x => x.Name).ToList(),
+                Periodicities = EnumToMultiselectList<Periodicity>()
+            };
 
             return View("Catalog", model);
         }
@@ -331,6 +347,21 @@ namespace PeriodicalLiterature.Web.Controllers
             return selectList;
         }
 
+        private MultiSelectList EnumToMultiselectList<T>() where T : struct
+        {
+            var list = ((T[])Enum.GetValues(typeof(T)))
+                .Select(c => new SelectListItem()
+                {
+                    Value = Convert.ToInt32(c).ToString(),
+                    Text = c.ToString()
+                })
+                .ToList();
+
+            var multiSelectList = new MultiSelectList(list, "Value", "Text");
+
+            return multiSelectList;
+        }
+
         private ContractSubscribeViewModel ConfigureContractSubscribeViewModel(
             Guid contractId,
             int month, 
@@ -387,6 +418,19 @@ namespace PeriodicalLiterature.Web.Controllers
             subscription.SubscriberId = subscriberId;
 
             return subscription;
+        }
+
+        private void IgnoreIfNameIsWhiteSpace(ContractFilterCriteria contractFilterCriteria)
+        {
+            if (contractFilterCriteria?.EditionName == null)
+            {
+                return;
+            }
+
+            if (contractFilterCriteria.EditionName.Trim() == string.Empty)
+            {
+                contractFilterCriteria.EditionName = null;
+            }
         }
     }
 }
